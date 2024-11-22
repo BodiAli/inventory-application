@@ -1,0 +1,128 @@
+.nav {
+  background-color: whitesmoke;
+  height: 0px;
+  transition: height 400ms ease-out;
+}
+
+.nav.is-active {
+  height: 150px;
+}
+
+.nav > div {
+  height: 40px;
+}
+
+.nav > ul {
+  justify-content: center;
+  gap: 200px;
+  opacity: 0;
+  display: none;
+  animation: fade-out 200ms ease-out forwards;
+  &.is-active {
+    display: flex;
+    animation: fade-in 400ms ease-in-out forwards;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    display: none;
+  }
+  to {
+    opacity: 1;
+    display: flex;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    display: flex;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.nav li {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav .secondary {
+  color: teal;
+}
+
+.hero {
+  height: 100vh;
+  background-image: url("/images/background-hero.jpg");
+  background-size: cover;
+  display: grid;
+  grid-template-areas:
+    "hamburger hamburger"
+    "hr hr"
+    "hero-text cards"
+    "hero-text cards";
+}
+
+.hamburger-container {
+  grid-area: hamburger;
+  display: flex;
+  justify-content: end;
+  padding: 1rem 1rem 8rem 1rem;
+}
+
+/* TODO: Add position absolute to render button in nav */
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.hero > hr {
+  grid-area: hr;
+  width: 100%;
+  height: 0;
+}
+
+.hero-text-container {
+  grid-area: hero-text;
+}
+
+.hero-cards-container {
+  grid-area: cards;
+}
+
+/* Hamburger button */
+.hamburger {
+  position: relative;
+  display: block;
+  width: 50px;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.hamburger .bar,
+.hamburger::after,
+.hamburger::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  margin: 6px 0px;
+  transition: transform 400ms ease-in-out;
+}
+
+.hamburger.is-active::before {
+  transform: scale(0);
+}
+
+.hamburger.is-active::after {
+  transform: scale(0);
+}
