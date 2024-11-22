@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <form>
+      <label for="colors">Add colors</label>
+      <input type="text" id="colors" />
+      <button type="button" onclick="addColor()">Add</button>
+    </form>
+    <script>
+      const addColorButton = document.querySelector("button");
+      const input = document.querySelector("input");
+
+      function addColor() {
+        const { value } = input;
+        const checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.id = value;
+        checkBox.name = "color";
+        checkBox.value = value;
+        checkBox.checked = true;
+        const checkBoxLabel = document.createElement("label");
+        checkBoxLabel.htmlFor = checkBox.id;
+        checkBoxLabel.textContent = value;
+        input.parentElement.insertBefore(checkBox, addColorButton);
+        input.parentElement.insertBefore(checkBoxLabel, addColorButton);
+      }
+
+      document.querySelector("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        console.log(formData.getAll("color"));
+
+        for (const [key, value] of formData.entries()) {
+          console.log(key, value);
+        }
+      });
+    </script>
+  </body>
+</html>
