@@ -4,20 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/global.css" />
     <link rel="stylesheet" href="/styles/index.css" />
     <title><%= title %> | TechNova</title>
   </head>
   <body>
-    <nav class="nav">
+    <nav class="nav is-active">
       <div></div>
       <hr />
-      <ul>
+      <img class="logo" src="/images/logo.svg" alt="logo" />
+      <ul class="is-active">
         <li>
-          <a href="">Home</a>
-          <a class="secondary">All Items</a>
+          <a href="" class="primary">Home</a>
+          <a href="" class="secondary">All Items</a>
         </li>
         <li>
-          <a href="">Categories</a>
+          <a class="primary" href="">Categories</a>
           <div>
             <% categories.forEach(category => { %>
             <a class="secondary" href=""><%= category.category_name %></a>
@@ -25,7 +27,7 @@
           </div>
         </li>
         <li>
-          <a href="">About</a>
+          <a class="primary" href="">About</a>
         </li>
       </ul>
     </nav>
