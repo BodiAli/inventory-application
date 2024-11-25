@@ -1,18 +1,38 @@
 .nav {
-  background-color: whitesmoke;
+  background-color: #4b4453;
   height: 0px;
   transition: height 400ms ease-out;
+  position: relative;
 }
 
 .nav.is-active {
-  height: 150px;
+  height: 250px;
 }
 
 .nav > div {
   height: 40px;
 }
 
+.nav > hr {
+  border-color: black;
+  border-top: 1px;
+}
+
+.logo {
+  position: absolute;
+  width: 5%;
+  border-radius: 20%;
+  left: 5%;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.logo.is-active {
+  opacity: 1;
+}
+
 .nav > ul {
+  margin-top: 20px;
   justify-content: center;
   gap: 200px;
   opacity: 0;
@@ -52,8 +72,15 @@
   gap: 15px;
 }
 
+.nav .primary {
+  color: white;
+  text-decoration: none;
+}
+
 .nav .secondary {
-  color: teal;
+  color: #b0a8b9;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 .hero {
@@ -66,6 +93,12 @@
     "hr hr"
     "hero-text cards"
     "hero-text cards";
+  transition: margin 200ms ease-in-out, border-radius 200ms ease-in-out;
+}
+
+.hero.is-active {
+  margin: 1rem;
+  border-radius: 10px;
 }
 
 .hamburger-container {
@@ -75,10 +108,19 @@
   padding: 1rem 1rem 8rem 1rem;
 }
 
-/* TODO: Add position absolute to render button in nav */
 .button-container {
   display: flex;
   align-items: center;
+  position: absolute;
+  top: 10px;
+}
+
+.button-container > span {
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+  &.is-active {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
 }
 
 .hero > hr {
