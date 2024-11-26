@@ -9,25 +9,27 @@
     <title><%= title %> | TechNova</title>
   </head>
   <body>
-    <nav class="nav is-active">
+    <nav class="nav">
       <div></div>
       <hr />
       <img class="logo" src="/images/logo.svg" alt="logo" />
-      <ul class="is-active">
+      <ul>
         <li>
-          <a href="" class="primary">Home</a>
-          <a href="" class="secondary">All Items</a>
+          <a href="/" class="primary">Home</a>
+          <a href="/items" class="secondary">All Items</a>
         </li>
         <li>
-          <a class="primary" href="">Categories</a>
-          <div>
+          <a class="primary" href="/categories">Categories</a>
+          <div class="categories">
             <% categories.forEach(category => { %>
-            <a class="secondary" href=""><%= category.category_name %></a>
+            <a class="secondary" href="/categories/<%= category.category_id %>"
+              ><%= category.category_name %></a
+            >
             <% }) %>
           </div>
         </li>
         <li>
-          <a class="primary" href="">About</a>
+          <a class="primary" href="/about">About</a>
         </li>
       </ul>
     </nav>
@@ -50,20 +52,24 @@
         <h1>TechNova</h1>
       </div>
       <div class="hero-cards-container">
-        <div class="featured-item">
-          <img src="https://placehold.co/300x200" alt="placeholder image" />
-          <p><%= category %></p>
-          <p><%= description %></p>
+        <div class="featured-item card">
+          <div class="featured-item-content">
+            <img src="https://placehold.co/300x200" alt="placeholder image" />
+            <div class="featured-item-text">
+              <p><%= category %></p>
+              <p><%= description %></p>
+            </div>
+          </div>
         </div>
         <div class="hero-links">
           <a href="">All items</a>
           <a href="">About us</a>
         </div>
-        <div class="hero-locations">
+        <div class="hero-locations card">
           <img src="https://placehold.co/300x200" alt="placeholder image" />
           <p>Locations</p>
         </div>
-        <div class="hero-categories">
+        <div class="hero-categories card">
           <p>Categories</p>
         </div>
       </div>
