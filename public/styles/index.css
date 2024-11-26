@@ -5,17 +5,41 @@
   position: relative;
 }
 
+.nav a {
+  position: relative;
+}
+
+.nav a::after {
+  content: "";
+  display: block;
+  width: 100%;
+  margin-top: 2px;
+  position: absolute;
+  transform: scale(0);
+  border-bottom: 1px solid #b0a8b9;
+  transition: transform 200ms ease-out;
+}
+
+.nav a:hover::after {
+  transform: scale(1);
+}
+
 .nav.is-active {
   height: 250px;
 }
 
 .nav > div {
-  height: 40px;
+  height: 50px;
 }
 
 .nav > hr {
   border-color: black;
   border-top: 1px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  &.is-active {
+    opacity: 1;
+  }
 }
 
 .logo {
@@ -72,6 +96,12 @@
   gap: 15px;
 }
 
+.nav .categories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .nav .primary {
   color: white;
   text-decoration: none;
@@ -113,6 +143,13 @@
   align-items: center;
   position: absolute;
   top: 10px;
+  background-color: #0000001e;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: background-color 200ms ease-in-out;
+  &.is-active {
+    background-color: transparent;
+  }
 }
 
 .button-container > span {
@@ -127,14 +164,64 @@
   grid-area: hr;
   width: 100%;
   height: 0;
+  border-color: black;
+  border-top: 1px;
 }
 
 .hero-text-container {
   grid-area: hero-text;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .hero-cards-container {
   grid-area: cards;
+  display: grid;
+  grid-template-areas:
+    "featured-item featured-item"
+    "links categories"
+    "locations categories";
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+  filter: blur(10px);
+}
+
+.hero-cards-container > .featured-item {
+  grid-area: featured-item;
+  display: flex;
+  padding: 0.5rem;
+}
+
+.featured-item > .featured-item-content {
+  z-index: 2;
+  display: flex;
+}
+
+.hero-cards-container > .hero-links {
+  grid-area: links;
+}
+
+.hero-cards-container > .hero-locations {
+  grid-area: locations;
+}
+
+.hero-cards-container > .hero-categories {
+  grid-area: categories;
 }
 
 /* Hamburger button */
