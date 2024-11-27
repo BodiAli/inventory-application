@@ -1,13 +1,13 @@
 const db = require("../db/queries");
 
 exports.getIndexPage = async (req, res) => {
-  const categories = await db.getAllCategories();
+  const categories = await db.getAllCategoriesLimitFive();
+  const [iPhone12] = await db.getIPhone12();
 
   res.render("index", {
     title: "Home",
     category: "Smart Phones",
-    description:
-      "lorem ipsum lorem ipsume lorem ipsum lorem ipsume lorem ipsum lorem ipsume lorem ipsum lorem ipsume",
+    featuredItem: iPhone12,
     categories,
   });
 };
