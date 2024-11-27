@@ -1,13 +1,17 @@
 const pool = require("./pool");
 
-async function getAllCategories() {
-  const { rows } = await pool.query("SELECT * FROM categories;");
+async function getAllCategoriesLimitFive() {
+  const { rows } = await pool.query("SELECT * FROM categories LIMIT 5;");
 
   return rows;
 }
 
-getAllCategories();
+async function getIPhone12() {
+  const { rows } = await pool.query("SELECT * FROM items WHERE item_name='iPhone 12';");
+  return rows;
+}
 
 module.exports = {
-  getAllCategories,
+  getAllCategoriesLimitFive,
+  getIPhone12,
 };
