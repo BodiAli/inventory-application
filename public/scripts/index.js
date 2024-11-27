@@ -8,13 +8,13 @@ const logoElement = document.querySelector(".nav .logo");
 const hrElement = document.querySelector(".nav > hr");
 
 function toggleNav(e) {
-  e.target.classList.toggle("is-active");
+  e.currentTarget.classList.toggle("is-active");
+  hamburgerButton.classList.toggle("is-active");
   navElement.classList.toggle("is-active");
   listElement.classList.toggle("is-active");
   spanElement.classList.toggle("is-active");
   heroElement.classList.toggle("is-active");
   logoElement.classList.toggle("is-active");
   hrElement.classList.toggle("is-active");
-  buttonContainerElement.classList.toggle("is-active");
 }
-hamburgerButton.addEventListener("click", toggleNav);
+buttonContainerElement.addEventListener("click", toggleNav);
