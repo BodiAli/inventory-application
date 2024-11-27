@@ -45,33 +45,37 @@
       <hr />
       <div class="hero-text-container">
         <p>
-          TechNova is the ultimate inventory management app for tech stores. Designed to streamline stock
+          TechNova is the ultimate inventory management app for tech items. Designed to streamline stock
           tracking and organization, it offers intuitive management of categories like smartphones, laptops,
           accessories, and more.
         </p>
         <h1>TechNova</h1>
       </div>
       <div class="hero-cards-container">
-        <div class="featured-item card">
+        <a href="/items/<%= featuredItem.item_id %>" class="featured-item card">
           <div class="featured-item-content">
-            <img src="https://placehold.co/300x200" alt="placeholder image" />
+            <img src="/images/iphone12.jpg" alt="black colored iPhone 12 next to it's white colored box" />
             <div class="featured-item-text">
-              <p><%= category %></p>
-              <p><%= description %></p>
+              <p class="featured-item-category"><%= featuredItem.item_name %></p>
+              <p class="featured-item-description"><%= featuredItem.item_description %></p>
             </div>
           </div>
-        </div>
+        </a>
         <div class="hero-links">
-          <a href="">All items</a>
-          <a href="">About us</a>
+          <a href="/items">All items</a>
+          <a href="/about">About us</a>
         </div>
-        <div class="hero-locations card">
-          <img src="https://placehold.co/300x200" alt="placeholder image" />
+        <a href="/" class="hero-locations card">
+          <img src="/images/map.svg" alt="Map of the entire world" />
           <p>Locations</p>
-        </div>
-        <div class="hero-categories card">
+        </a>
+        <a href="/categories" class="hero-categories card">
+          <img
+            src="/images/categories.jpg"
+            alt="Multiple tech gadgets well-arranged with black gadgets on a white background on the left side and white gadgets with dark background on the right side"
+          />
           <p>Categories</p>
-        </div>
+        </a>
       </div>
     </div>
     <script src="/scripts/index.js"></script>
