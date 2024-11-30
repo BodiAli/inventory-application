@@ -18,3 +18,33 @@ function toggleNav(e) {
   hrElement.classList.toggle("is-active");
 }
 buttonContainerElement.addEventListener("click", toggleNav);
+
+const imagesObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.children[0].classList.add("animate");
+      }
+    });
+  },
+  { rootMargin: "0px 0px -200px 0px" }
+);
+
+const images = document.querySelectorAll(".get-started-img");
+
+images.forEach((image) => imagesObserver.observe(image));
+
+const pObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate");
+      }
+    });
+  },
+  { rootMargin: "0px 0px -100px 0px" }
+);
+
+const getStartedPTags = document.querySelectorAll(".get-started-text > p");
+
+getStartedPTags.forEach((pTag) => pObserver.observe(pTag));
