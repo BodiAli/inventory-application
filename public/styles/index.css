@@ -244,8 +244,9 @@
 }
 
 .featured-item-content > img {
-  min-width: 200px;
-  max-height: 150px;
+  aspect-ratio: 2 / 1;
+  width: 200px;
+  height: 150px;
   object-fit: cover;
   align-self: center;
 }
@@ -330,6 +331,90 @@
   bottom: 5%;
   right: 5%;
   color: black;
+}
+
+main {
+  background-color: #fff;
+  padding: 4rem 1rem;
+}
+
+main > h2 {
+  font-size: 4rem;
+}
+
+.get-started-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.get-started-container > hr {
+  width: 100%;
+  border-top: 1px;
+}
+
+.get-started-container > .get-started-card {
+  display: flex;
+  gap: 50px;
+  text-decoration: none;
+  color: black;
+  padding: 1rem 1rem 1rem 6rem;
+  border-radius: 5px;
+}
+
+.get-started-card > .get-started-text {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.get-started-text > h3 {
+  font-size: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.get-started-text > p {
+  transition: opacity 500ms ease, transform 500ms ease;
+  opacity: 0;
+  transform: translateY(50%);
+  &.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.get-started-text > h3 > img {
+  width: 30px;
+}
+
+.get-started-card > .get-started-img {
+  display: flex;
+  flex-basis: 100%;
+}
+
+.get-started-img > img {
+  aspect-ratio: 16 / 4;
+  width: 30%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+
+  &.animate {
+    animation: extend-in 1000ms ease-in forwards;
+  }
+}
+
+@keyframes extend-in {
+  from {
+    width: 30%;
+  }
+  100% {
+    width: 50%;
+  }
 }
 
 /* Hamburger button */
