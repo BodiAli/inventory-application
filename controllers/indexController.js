@@ -6,7 +6,6 @@ exports.getIndexPage = async (req, res) => {
 
   res.render("index", {
     title: "Home",
-    category: "Smart Phones",
     featuredItem: iPhone12,
     categories,
   });
