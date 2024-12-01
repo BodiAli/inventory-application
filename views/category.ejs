@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("partials/global-styles") %>
+    <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/styles/category.css" />
+    <title><%= title %> | TechNova</title>
+  </head>
+  <!-- TODO: popover confirming category will be deleted -->
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <div class="dropdown">
+        <button class="dropbtn">
+          <img src="/images/dots-vertical.svg" alt="Options" />
+        </button>
+        <div class="dropdown-content">
+          <a href="/category/<%= category.category_id %>/edit">Edit</a>
+          <button>Delete</button>
+        </div>
+      </div>
+      <section class="category">
+        <h2><%= category.category_name%></h2>
+        <img src="/images/smart-phones-category.jpg" alt="" />
+      </section>
+      <hr />
+      <section class="items">
+        <% rows.forEach(row => { %>
+        <a href="/items/<%= row.item_id %>" class="item-card card">
+          <div class="item-text">
+            <p class="item-name"><%= row.item_name %></p>
+            <p class="item-description"><%= row.item_description %></p>
+            <p class="item-price"><%= row.item_price %>$</p>
+          </div>
+          <div class="image">
+            <img src="/images/iphone12.jpg" alt="placeholder image" />
+          </div>
+        </a>
+        <% }) %>
+      </section>
+    </main>
+  </body>
+</html>
