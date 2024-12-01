@@ -9,4 +9,10 @@ categoriesRouter.get(
   categoriesController.getAllCategories
 );
 
+categoriesRouter.get(
+  "/:id",
+  categoriesController.passCurrentRouteToTemplate,
+  categoriesController.getCategory
+);
+
 module.exports = categoriesRouter;
