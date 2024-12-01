@@ -3,7 +3,8 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: #b0a8b9;
+  background-color: #b0a8b991;
+  backdrop-filter: blur(5px);
   box-shadow: 5px 0px 10px black;
 }
 
