@@ -33,51 +33,15 @@ const SQL = `
     '1'
   ), 
   (
-    'Samsung Galaxy S21',
-    'The Samsung Galaxy S21 is a flagship Android smartphone featuring a 6.2-inch Dynamic AMOLED 2X display with a smooth 120Hz refresh rate for vibrant visuals.',
-    '350',
-    '1'
-  ), 
-  (
-    'Google Pixel 7',
-    'The Google Pixel 7 is a premium smartphone designed for photography lovers and seamless Android experiences. It features a 6.3-inch OLED display with sharp, vivid colors and a smooth 90Hz refresh rate.',
-    '244',
-    '1'
-  ),
-  (
     'MacBook Air (M2)',
     'A lightweight, ultra-thin laptop with the powerful Apple M2 chip, offering exceptional performance and long battery life—perfect for work and travel.',
     '999',
     '2'
   ),
   (
-    'Dell XPS 13',
-    'A premium laptop with a stunning 13.4-inch InfinityEdge display, powerful Intel processors, and sleek design for productivity on the go.',
-    '1299',
-    '2'
-  ),
-  (
-    'HP Spectre x360',
-    'A versatile 2-in-1 laptop with a touch-enabled display, premium build quality, and excellent performance for creative professionals and multitaskers.',
-    '1449',
-    '2'
-  ),
-  (
     'Apple Watch Series 8',
     'A feature-rich smartwatch with advanced health tracking, fitness features, and seamless integration with Apple devices.',
     '344',
-    '3'
-  ),
-  (
-    'Samsung Galaxy Watch 6',
-    'A stylish and powerful smartwatch with a vibrant display, long battery life, and comprehensive fitness and wellness tracking.',
-    '205',
-    '3'
-  ),
-  (
-    'Garmin Venu 2',
-    'A rugged smartwatch designed for fitness enthusiasts, offering detailed activity tracking, GPS, and durable build quality.',
-    '259',
     '3'
   );
 
