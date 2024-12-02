@@ -11,13 +11,13 @@ const SQL = `
     item_name VARCHAR (100) NOT NULL UNIQUE,
     item_description TEXT NOT NULL,
     item_price INTEGER NOT NULL,
-    category_id INTEGER REFERENCES categories ON DELETE CASCADE
+    item_category_id INTEGER REFERENCES categories ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS colors (
     color_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     color_name VARCHAR (50) NOT NULL,
-    item_id INTEGER REFERENCES items
+    color_item_id INTEGER REFERENCES items
   );
 
   INSERT INTO categories (category_name) VALUES
@@ -25,7 +25,7 @@ const SQL = `
    ('Laptops'), 
    ('Smart Watches');
 
-  INSERT INTO items (item_name, item_description, item_price, category_id) VALUES
+  INSERT INTO items (item_name, item_description, item_price, item_category_id) VALUES
    (
     'iPhone 12',
     'The iPhone 12 is a sleek and powerful smartphone from Apple, featuring a 6.1-inch Super Retina XDR display for stunning visuals and a Ceramic Shield front for enhanced durability.',
@@ -46,7 +46,7 @@ const SQL = `
   );
 
 
-  INSERT INTO colors (color_name, item_id) VALUES ('black', '1');
+  INSERT INTO colors (color_name, color_item_id) VALUES ('black', '1');
   
 `;
 
