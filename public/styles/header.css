@@ -28,7 +28,7 @@ header > a {
   color: rgb(255, 255, 255);
   position: relative;
   &:hover {
-    color: rgb(219, 217, 217);
+    color: rgb(172, 171, 171);
   }
 }
 
