@@ -8,26 +8,35 @@
     <link rel="stylesheet" href="/styles/category.css" />
     <title><%= title %> | TechNova</title>
   </head>
-  <!-- TODO: popover confirming category will be deleted -->
   <body>
     <%- include('partials/header') %>
+    <form popover id="delete-category" action="/category/<%= category.category_id %>/delete">
+      <div>
+        <p>Deleting this category will also delete ALL items within it</p>
+        <p>Are you sure you want to proceed?</p>
+        <button type="submit">Confirm</button>
+      </div>
+    </form>
     <main>
-      <div class="dropdown">
+      <div class="dropdown <%= isCategoryFeatured ? 'hidden' : '' %>">
         <button class="dropbtn">
           <img src="/images/dots-vertical.svg" alt="Options" />
         </button>
         <div class="dropdown-content">
           <a href="/category/<%= category.category_id %>/edit">Edit</a>
-          <button>Delete</button>
+          <button popovertarget="delete-category">Delete</button>
         </div>
       </div>
       <section class="category">
         <h2><%= category.category_name%></h2>
-        <img src="/images/smart-phones-category.jpg" alt="" />
+        <img src="<%= category.category_name === "Smart Phones" ? '/images/smart-phones-category.jpg' :
+        category.category_name === 'Laptops' ? '/images/laptops-category.jpg' : category.category_name ===
+        'Smart Watches' ? '/images/smart-watches-category.jpg' : 'https://placehold.co/200x150' %>" alt="<%=
+        category.category_name %> placeholder image" />
       </section>
       <hr />
-      <section class="items">
-        <% rows.forEach(row => { %>
+      <section class="<%= hasItems ? 'items' : '' %>">
+        <% if (hasItems) { %> <% rows.forEach(row => { %>
         <a href="/items/<%= row.item_id %>" class="item-card card">
           <div class="item-text">
             <p class="item-name"><%= row.item_name %></p>
@@ -35,10 +44,15 @@
             <p class="item-price"><%= row.item_price %>$</p>
           </div>
           <div class="image">
-            <img src="/images/iphone12.jpg" alt="placeholder image" />
+            <img
+              src="<%= row.item_name === 'iPhone 12' ? '/images/iphone12.jpg' : row.item_name === 'MacBook Air (M2)' ? '/images/macbook-air.jpg' : row.item_name === 'Apple Watch Series 8' ? '/images/apple-watch.jpg' : 'https://placehold.co/200x150' %>"
+              alt="<%= row.item_name %> placeholder image"
+            />
           </div>
         </a>
-        <% }) %>
+        <% }) %> <% } else { %>
+        <p class="empty">This category has no items</p>
+        <%} %>
       </section>
     </main>
   </body>
