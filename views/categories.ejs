@@ -11,48 +11,6 @@
   <body>
     <%- include('./partials/header') %>
     <main>
-      <a href="/categories/<%= smartPhones.category_id %>">
-        <div class="category-card">
-          <div class="text">
-            <h3><%= smartPhones.category_name %></h3>
-            <img
-              src="/images/right-arrow.svg"
-              alt="right arrow indicating navigating to category when clicked"
-            />
-          </div>
-          <div class="image">
-            <img src="/images/smart-phones-category.jpg" alt="placeholder image" />
-          </div>
-        </div>
-      </a>
-      <a href="/categories/<%= laptops.category_id %>">
-        <div class="category-card">
-          <div class="text">
-            <h3><%= laptops.category_name %></h3>
-            <img
-              src="/images/right-arrow.svg"
-              alt="right arrow indicating navigating to category when clicked"
-            />
-          </div>
-          <div class="image">
-            <img src="/images/laptops-category.jpg" alt="placeholder image" />
-          </div>
-        </div>
-      </a>
-      <a href="/categories/<%= smartWatches.category_id %>">
-        <div class="category-card">
-          <div class="text">
-            <h3><%= smartWatches.category_name %></h3>
-            <img
-              src="/images/right-arrow.svg"
-              alt="right arrow indicating navigating to category when clicked"
-            />
-          </div>
-          <div class="image">
-            <img src="/images/smart-watches-category.jpg" alt="placeholder image" />
-          </div>
-        </div>
-      </a>
       <% categories.forEach((category) => { %>
       <a href="/categories/<%= category.category_id %>">
         <div class="category-card">
@@ -64,7 +22,10 @@
             />
           </div>
           <div class="image">
-            <img src="https://placehold.co/200x150" alt="placeholder image" />
+            <img src="<%= category.category_name === "Smart Phones" ? '/images/smart-phones-category.jpg' :
+            category.category_name === 'Laptops' ? '/images/laptops-category.jpg' : category.category_name ===
+            'Smart Watches' ? '/images/smart-watches-category.jpg' : 'https://placehold.co/200x150' %>"
+            alt="<%= category.category_name %> placeholder image" />
           </div>
         </div>
       </a>
