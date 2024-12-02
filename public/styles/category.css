@@ -3,6 +3,48 @@ body {
   background-size: cover;
 }
 
+[popover] {
+  border-radius: 5px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.549);
+}
+
+form > div {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form > div > p {
+  font-size: 1.2rem;
+}
+
+form button {
+  background-color: #b0a8b9;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 0.4rem 0.8rem;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+  &:hover {
+    background-color: #9b94a2;
+  }
+}
+
+:popover-open {
+  inset: unset;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+:popover-open::backdrop {
+  backdrop-filter: blur(3px);
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -14,6 +56,9 @@ main {
 .dropdown {
   position: relative;
   align-self: end;
+  &.hidden {
+    display: none;
+  }
 }
 
 .dropdown:hover .dropdown-content {
@@ -25,7 +70,6 @@ main {
 }
 
 .dropbtn {
-  padding: 0.4rem;
   border: none;
   border-radius: 5px;
   background: none;
@@ -54,6 +98,7 @@ main {
   background: none;
   text-decoration: none;
   font-size: 1rem;
+  transition: background-color 200ms ease;
 }
 
 .dropdown-content > *:hover {
@@ -81,10 +126,21 @@ main > hr {
 
 .category > img {
   aspect-ratio: 16 / 9;
+  width: 50%;
   border-radius: 5px;
   object-fit: cover;
   object-position: center 65%;
   box-shadow: 0px 0px 10px black;
+}
+
+.empty {
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.368);
 }
 
 .items {
@@ -98,7 +154,6 @@ main > hr {
   overflow: hidden;
   backdrop-filter: blur(20px);
   text-decoration: none;
-  transition: background-color 200ms ease-out;
 }
 
 .card::before {
@@ -126,8 +181,9 @@ main > hr {
 
 .item-card > .item-text {
   color: black;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content 1fr min-content;
   gap: 10px;
   z-index: 1;
 }
@@ -141,7 +197,7 @@ main > hr {
 }
 
 .item-text > .item-price {
-  align-self: end;
+  justify-self: end;
 }
 
 .image {
@@ -149,7 +205,8 @@ main > hr {
 }
 
 .image > img {
-  width: 100%;
+  width: 170px;
   object-fit: cover;
   border-radius: 5px;
+  aspect-ratio: 1 / 1;
 }
