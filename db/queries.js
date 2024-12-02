@@ -1,16 +1,7 @@
 const pool = require("./pool");
 
 async function getAllCategories() {
-  const { rows } = await pool.query(
-    "SELECT * FROM categories WHERE category_name NOT IN ('Smart Phones', 'Laptops', 'Smart Watches');"
-  );
-  return rows;
-}
-
-async function getFeaturedCategories() {
-  const { rows } = await pool.query(
-    "SELECT * FROM categories WHERE category_name IN ('Smart Phones', 'Laptops', 'Smart Watches');"
-  );
+  const { rows } = await pool.query("SELECT * FROM categories;");
   return rows;
 }
 
@@ -22,7 +13,7 @@ async function getAllCategoriesLimitFive() {
 
 async function getCategory(id) {
   const { rows } = await pool.query(
-    "SELECT * FROM categories JOIN items ON categories.category_id = items.category_id WHERE categories.category_id = $1;",
+    "SELECT * FROM categories LEFT JOIN items ON categories.category_id = items.item_category_id WHERE categories.category_id = $1;",
     [id]
   );
 
@@ -30,13 +21,12 @@ async function getCategory(id) {
 }
 
 async function getIPhone12() {
-  const { rows } = await pool.query("SELECT * FROM items WHERE item_name='iPhone 12';");
+  const { rows } = await pool.query("SELECT * FROM items WHERE item_name = 'iPhone 12';");
   return rows;
 }
 
 module.exports = {
   getAllCategories,
-  getFeaturedCategories,
   getAllCategoriesLimitFive,
   getCategory,
   getIPhone12,
