@@ -1,6 +1,7 @@
+const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 
-exports.getIndexPage = async (req, res) => {
+exports.getIndexPage = asyncHandler(async (req, res) => {
   const categories = await db.getAllCategoriesLimitFive();
   const [iPhone12] = await db.getIPhone12();
 
@@ -9,4 +10,4 @@ exports.getIndexPage = async (req, res) => {
     featuredItem: iPhone12,
     categories,
   });
-};
+});
