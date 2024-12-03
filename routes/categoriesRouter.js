@@ -10,6 +10,12 @@ categoriesRouter.get(
 );
 
 categoriesRouter.get(
+  "/create",
+  categoriesController.passCurrentRouteToTemplate,
+  categoriesController.getCreateCategoryForm
+);
+
+categoriesRouter.get(
   "/:id",
   categoriesController.passCurrentRouteToTemplate,
   categoriesController.getCategory
