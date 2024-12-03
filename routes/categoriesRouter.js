@@ -3,22 +3,14 @@ const categoriesController = require("../controllers/categoriesController");
 
 const categoriesRouter = Router();
 
-categoriesRouter.get(
-  "/",
-  categoriesController.passCurrentRouteToTemplate,
-  categoriesController.getAllCategories
-);
+categoriesRouter.get("/", categoriesController.getAllCategories);
 
-categoriesRouter.get(
-  "/create",
-  categoriesController.passCurrentRouteToTemplate,
-  categoriesController.getCreateCategoryForm
-);
+categoriesRouter.get("/create", categoriesController.getCreateCategoryForm);
+categoriesRouter.post("/create", categoriesController.createCategory);
 
-categoriesRouter.get(
-  "/:id",
-  categoriesController.passCurrentRouteToTemplate,
-  categoriesController.getCategory
-);
+categoriesRouter.get("/:id/update", categoriesController.getUpdateCategoryForm);
+categoriesRouter.post("/:id/update", categoriesController.updateCategory);
+
+categoriesRouter.get("/:id", categoriesController.getCategory);
 
 module.exports = categoriesRouter;
