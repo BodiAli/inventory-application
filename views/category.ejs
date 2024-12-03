@@ -10,7 +10,7 @@
   </head>
   <body>
     <%- include('partials/header') %>
-    <form popover id="delete-category" action="/category/<%= category.category_id %>/delete">
+    <form popover id="delete-category" action="/categories/<%= category.category_id %>/delete">
       <div>
         <p>Deleting this category will also delete ALL items within it</p>
         <p>Are you sure you want to proceed?</p>
@@ -23,7 +23,7 @@
           <img src="/images/dots-vertical.svg" alt="Options" />
         </button>
         <div class="dropdown-content">
-          <a href="/category/<%= category.category_id %>/edit">Edit</a>
+          <a href="/categories/<%= category.category_id %>/update">Edit</a>
           <button popovertarget="delete-category">Delete</button>
         </div>
       </div>
