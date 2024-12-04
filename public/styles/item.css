@@ -1,0 +1,167 @@
+main {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+[popover] {
+  border-radius: 5px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.549);
+}
+
+form > div {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form > div > p {
+  font-size: 1.4rem;
+}
+
+form button {
+  background-color: #b0a8b9;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 0.4rem 0.8rem;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+  &:hover {
+    background-color: #9b94a2;
+  }
+}
+
+:popover-open {
+  inset: unset;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+:popover-open::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: end;
+}
+
+.dropdown {
+  position: relative;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: gray;
+}
+
+.dropbtn {
+  cursor: pointer;
+  transition: background-color 200ms ease;
+  border: none;
+  border-radius: 5px;
+  background: none;
+}
+
+.dropbtn img {
+  width: 35px;
+  filter: invert(100%);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-content > * {
+  cursor: pointer;
+  color: black;
+  display: block;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  background: none;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 200ms ease;
+}
+
+.dropdown-content > *:hover {
+  background-color: #ddd;
+}
+
+.item-container {
+  display: flex;
+  gap: 10px;
+}
+
+.image-container {
+  flex: 1 0 0%;
+}
+
+.image-container > img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  gap: 20px;
+}
+
+.text-container > h2 {
+  font-size: 4rem;
+  font-weight: 500;
+}
+
+.description {
+  font-size: 1.2rem;
+}
+
+.price {
+  font-size: 2rem;
+  margin-left: auto;
+}
+
+.colors-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.colors-container > p {
+  font-size: 1.5rem;
+}
+
+.colors-container > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color > p {
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  filter: invert(100%);
+  font-size: 1.2rem;
+  width: 100%;
+}
