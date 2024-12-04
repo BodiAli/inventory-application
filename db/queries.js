@@ -48,6 +48,24 @@ async function getIPhone12() {
   return rows;
 }
 
+async function getAllItems() {
+  const { rows } = await pool.query("SELECT * FROM items;");
+  return rows;
+}
+
+async function getItem(id) {
+  const { rows } = await pool.query("SELECT * FROM items WHERE item_id = $1;", [id]);
+  return rows;
+}
+
+async function getColorsInItem(id) {
+  const { rows } = await pool.query(
+    "SELECT color_name FROM colors JOIN colors_items ON color_id_fk = color_id WHERE item_id_fk = $1;",
+    [id]
+  );
+  return rows;
+}
+
 module.exports = {
   getAllCategories,
   getAllCategoriesLimitFive,
@@ -57,4 +75,7 @@ module.exports = {
   createCategory,
   updateCategory,
   getIPhone12,
+  getAllItems,
+  getItem,
+  getColorsInItem,
 };
