@@ -31,7 +31,7 @@ header > a {
   transition: color 200ms ease;
 }
 
-.nav:hover :not(:hover) {
+.nav:hover > a:not(:hover) {
   color: rgb(172, 171, 171);
 }
 
