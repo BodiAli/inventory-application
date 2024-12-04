@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/global-styles') %>
+    <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/styles/item.css" />
+    <title><%= title %> | TechNova</title>
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <form popover id="delete-item" method="post" action="/items/<%= item.item_id %>/delete">
+      <div>
+        <p>Are you sure you want to delete <%= item.item_name %>?</p>
+        <button type="submit">Confirm</button>
+      </div>
+    </form>
+    <main>
+      <div class="dropdown-container">
+        <div class="dropdown <%= isItemFeatured ? 'hidden' : '' %>">
+          <button class="dropbtn">
+            <img src="/images/dots-vertical.svg" alt="Options" />
+          </button>
+          <div class="dropdown-content">
+            <a href="/items/<%= item.item_id %>/update">Edit</a>
+            <button popovertarget="delete-item">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div class="item-container">
+        <div class="image-container">
+          <img src="<%= item.item_name === "iPhone 12" ? '/images/iphone12.jpg' : item.item_name === 'MacBook Air (M2)' ? '/images/macbook-air.jpg' : item.item_name === 'Apple Watch Series 8' ?
+          '/images/apple-watch.jpg' : 'https://placehold.co/200x150' %>" alt="<%= item.item_name %>
+          placeholder image" />
+        </div>
+        <div class="text-container">
+          <h2><%= item.item_name %></h2>
+          <p class="description"><%= item.item_description %></p>
+          <p class="price"><span>Price:</span> <%= item.item_price%>$</p>
+          <div class="colors-container">
+            <p>Comes in these colors</p>
+            <div>
+              <% colorsInItem.forEach((color) => { %>
+                <div 
+                 <% /* eslint-disable css-propertyvalueexpected */ %>
+                style="background-color: <%= color.color_name%>; color: <%= color.color_name %>;"
+                class="color">
+                  <p <% /* eslint-disable css-propertyvalueexpected */ %>
+                    style="border: 2px solid <%= color.color_name %>;"><%= color.color_name %></p>
+                </div>    
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
