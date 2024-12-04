@@ -16,8 +16,13 @@ const SQL = `
 
   CREATE TABLE IF NOT EXISTS colors (
     color_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    color_name VARCHAR (50) NOT NULL,
-    color_item_id INTEGER REFERENCES items
+    color_name VARCHAR (50) NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS colors_items (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    color_id_fk INTEGER REFERENCES colors ON DELETE CASCADE,
+    item_id_fk INTEGER REFERENCES items ON DELETE CASCADE
   );
 
   INSERT INTO categories (category_name) VALUES
@@ -46,8 +51,18 @@ const SQL = `
   );
 
 
-  INSERT INTO colors (color_name, color_item_id) VALUES ('black', '1');
+  INSERT INTO colors (color_name) VALUES
+   ('Black'),
+   ('White');
   
+
+   INSERT INTO colors_items (color_id_fk, item_id_fk) VALUES 
+   ('1', '1'),
+   ('2', '1'),
+   ('1', '2'),
+   ('2', '2'),
+   ('1', '3'),
+   ('2', '3');
 `;
 
 const connectionString = process.argv[2];
