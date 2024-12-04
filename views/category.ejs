@@ -10,7 +10,7 @@
   </head>
   <body>
     <%- include('partials/header') %>
-    <form popover id="delete-category" action="/categories/<%= category.category_id %>/delete">
+    <form popover id="delete-category" method="POST" action="/categories/<%= category.category_id %>/delete">
       <div>
         <p>Deleting this category will also delete ALL items within it</p>
         <p>Are you sure you want to proceed?</p>
