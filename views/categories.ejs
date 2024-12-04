@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include("./partials/global-styles") %>
     <link rel="stylesheet" href="/styles/header.css" />
-    <link rel="stylesheet" href="/styles/categories.css" />
+    <link rel="stylesheet" href="/styles/all-records.css" />
     <title><%= title %> | TechNova</title>
   </head>
   <body>
@@ -13,7 +13,7 @@
     <main>
       <% categories.forEach((category) => { %>
       <a href="/categories/<%= category.category_id %>">
-        <div class="category-card">
+        <div class="card">
           <div class="text">
             <h3><%= category.category_name %></h3>
             <img
