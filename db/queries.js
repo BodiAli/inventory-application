@@ -21,14 +21,14 @@ async function getCategory(id) {
 }
 
 async function getNumberOfCategoriesByName(name) {
-  const { rows } = await pool.query("SELECT COUNT(*) FROM categories WHERE category_name = $1", [name]);
+  const { rows } = await pool.query("SELECT COUNT(*) FROM categories WHERE category_name ILIKE $1", [name]);
 
   return rows;
 }
 
 async function getNumberOfCategoriesThatIsNotThisId(id, name) {
   const { rows } = await pool.query(
-    "SELECT COUNT(*) FROM categories WHERE category_name = $1 AND category_id != $2",
+    "SELECT COUNT(*) FROM categories WHERE category_name ILIKE $1 AND category_id != $2",
     [name, id]
   );
 
@@ -58,12 +58,44 @@ async function getItem(id) {
   return rows;
 }
 
+async function createItem(itemName, itemDescription, itemPrice) {
+  const { rows } = await pool.query(
+    "INSERT INTO items (item_name, item_description, item_price) VALUES ($1, $2, $3) RETURNING item_id",
+    [itemName, itemDescription, itemPrice]
+  );
+
+  return rows[0].item_id;
+}
+
+async function getNumberOfItemsByName(itemName) {
+  const { rows } = await pool.query("SELECT COUNT(*) FROM items WHERE item_name ILIKE $1", [itemName]);
+  return rows;
+}
+
 async function getColorsInItem(id) {
   const { rows } = await pool.query(
     "SELECT color_name FROM colors JOIN colors_items ON color_id_fk = color_id WHERE item_id_fk = $1;",
     [id]
   );
   return rows;
+}
+
+async function getAllColors() {
+  const { rows } = await pool.query("SELECT * FROM colors;");
+  return rows;
+}
+
+async function createColor(colorName) {
+  await pool.query("INSERT INTO colors (color_name) VALUES ($1);", [colorName]);
+}
+
+async function getNumberOfColorsByName(colorName) {
+  const { rows } = await pool.query("SELECT COUNT(*) FROM colors WHERE color_name ILIKE $1", [colorName]);
+  return rows;
+}
+
+async function createItemColor(colorId, itemId) {
+  await pool.query("INSERT INTO colors_items (color_id_fk, item_id_fk) VALUES ($1, $2)", [colorId, itemId]);
 }
 
 module.exports = {
@@ -77,5 +109,11 @@ module.exports = {
   getIPhone12,
   getAllItems,
   getItem,
+  createItem,
+  getNumberOfItemsByName,
   getColorsInItem,
+  getAllColors,
+  createColor,
+  getNumberOfColorsByName,
+  createItemColor,
 };
