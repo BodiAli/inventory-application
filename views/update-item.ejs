@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('partials/global-styles') %>
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/update-item.css">
+  <title><%= title %> | TechNova</title>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <div class="container">
+      <form method="post">
+        <%- include('partials/errors') %>
+        <h2>Update <%= item.item_name %></h2>
+        <div class="form-content">
+          <label>
+            <span>Item name*:</span>
+            <input maxlength="100" type="text" name="itemName" required value="<%= item.item_name %>">
+          </label>
+          <label>
+            <span>Item description*:</span>
+            <input type="text" name="itemDescription" required value="<%= item.item_description %>">
+          </label>
+          <div class="choose-color-container">
+            <p>Item colors:</p>
+            <div class="choose-color">
+              <% colors.forEach(color => { %>
+                <label>
+                  <%= color.color_name %>
+                  <input 
+                    <%= colorsInItem.some(colorInItem => colorInItem.color_name === color.color_name) ? 'checked' : '' %> 
+                    name="colors" 
+                    type="checkbox" 
+                    value="<%= color.color_id %>">
+                </label>
+              <% }) %>              
+            </div>
+          </div>
+          <label>
+            <span>Item price*:</span>
+            <input type="number" name="itemPrice" required value="<%= item.item_price %>">
+          </label>
+          <label>
+            Choose a category:
+            <select name="category" >
+            <% categories.forEach(category => { %>
+              <option <%= item.item_category_id === category.category_id ? 'selected' : '' %> value="<%= category.category_id %>"><%= category.category_name %></option>
+            <% }) %>
+            </select>
+          </label>
+        </div>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
