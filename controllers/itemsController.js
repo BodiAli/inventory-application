@@ -23,8 +23,8 @@ exports.getItem = asyncHandler(async (req, res) => {
 
 exports.getCreateItemForm = asyncHandler(async (req, res) => {
   const colors = await db.getAllColors();
-
-  res.render("create-item", { title: "Create Item", colors });
+  const categories = await db.getAllCategories();
+  res.render("create-item", { title: "Create Item", colors, categories });
 });
 
 const emptyErr = "can not be empty";
@@ -57,17 +57,20 @@ exports.createItem = [
 
     if (!errors.isEmpty()) {
       const colors = await db.getAllColors();
+      const categories = await db.getAllCategories();
 
       res.status(400).render("create-item", {
         title: "Create Item",
         colors,
+        categories,
         errors: errors.array(),
       });
       return;
     }
 
-    const { itemName, itemDescription, itemPrice, colors } = req.body;
-    const itemId = await db.createItem(itemName, itemDescription, itemPrice);
+    const { itemName, itemDescription, itemPrice, category, colors } = req.body;
+
+    const itemId = await db.createItem(itemName, itemDescription, itemPrice, category);
 
     colors?.forEach(async (colorId) => {
       await db.createItemColor(colorId, itemId);
