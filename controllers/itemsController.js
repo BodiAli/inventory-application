@@ -32,7 +32,7 @@ const validateItem = [
   body("itemName")
     .trim()
     .notEmpty()
-    .withMessage(`item name ${emptyErr}`)
+    .withMessage(`Item name ${emptyErr}`)
     .custom(async (value) => {
       const [{ count }] = await db.getNumberOfItemsByName(value);
 
@@ -41,8 +41,13 @@ const validateItem = [
       }
       return true;
     }),
-  body("itemDescription").trim().notEmpty().withMessage(`item description ${emptyErr}`),
-  body("itemPrice").trim().notEmpty().withMessage(`item price ${emptyErr}`),
+  body("itemDescription").trim().notEmpty().withMessage(`Item description ${emptyErr}`),
+  body("itemPrice")
+    .trim()
+    .notEmpty()
+    .withMessage(`Item price ${emptyErr}`)
+    .isNumeric({ no_symbols: true })
+    .withMessage("Item price must be a positive integer"),
 ];
 
 exports.createItem = [
@@ -64,7 +69,7 @@ exports.createItem = [
     const { itemName, itemDescription, itemPrice, colors } = req.body;
     const itemId = await db.createItem(itemName, itemDescription, itemPrice);
 
-    colors.forEach(async (colorId) => {
+    colors?.forEach(async (colorId) => {
       await db.createItemColor(colorId, itemId);
     });
 
