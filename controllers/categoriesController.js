@@ -41,6 +41,7 @@ const validateCategory = [
       if (Number(count) > 0) {
         throw new Error("Category name already exists, please choose a different name.");
       }
+      return true;
     }),
 ];
 
@@ -80,8 +81,9 @@ const validateCategoryUpdate = [
     .custom(async (value, { req }) => {
       const [{ count }] = await db.getNumberOfCategoriesThatIsNotThisId(req.params.id, value);
       if (Number(count) > 0) {
-        throw new Error("Category already exists please choose a different name.");
+        throw new Error("Category name already exists, please choose a different name.");
       }
+      return true;
     }),
 ];
 
