@@ -171,6 +171,7 @@ main > hr {
 
 .item-card {
   display: flex;
+  justify-content: space-between;
   gap: 20px;
   padding: 0.5rem;
   border-radius: 5px;
@@ -188,6 +189,7 @@ main > hr {
   grid-auto-rows: min-content 1fr min-content;
   gap: 10px;
   z-index: 1;
+  flex: 1;
 }
 
 .item-text > .item-name {
