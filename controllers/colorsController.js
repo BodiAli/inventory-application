@@ -36,10 +36,12 @@ exports.createColor = [
 
     if (!errors.isEmpty()) {
       const colors = await db.getAllColors();
+      const categories = await db.getAllCategories();
 
       res.status(400).render("create-item", {
         title: "Create Item",
         colors,
+        categories,
         colorsError: errors.array(),
       });
       return;
