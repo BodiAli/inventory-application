@@ -39,17 +39,19 @@
           <p class="description"><%= item.item_description %></p>
           <p class="price"><span>Price:</span> <%= item.item_price%>$</p>
           <div class="colors-container">
-            <p>Comes in these colors</p>
-            <div>
-              <% colorsInItem.forEach((color) => { %>
-                <div 
-                 <% /* eslint-disable css-propertyvalueexpected */ %>
-                style="background-color: <%= color.color_name%>; color: <%= color.color_name %>;"
-                class="color">
-                  <p <% /* eslint-disable css-propertyvalueexpected */ %>
-                    style="border: 2px solid <%= color.color_name %>;"><%= color.color_name %></p>
-                </div>    
-              <% }) %>
+            <% if (colorsInItem.length !== 0) { %>
+              <p>Comes in these colors</p>
+              <div>
+                <% colorsInItem.forEach((color) => { %>
+                  <div 
+                   <% /* eslint-disable css-propertyvalueexpected */ %>
+                  style="background-color: <%= color.color_name%>; color: <%= color.color_name %>;"
+                  class="color">
+                    <p <% /* eslint-disable css-propertyvalueexpected */ %>
+                      style="border: 2px solid <%= color.color_name %>;"><%= color.color_name %></p>
+                  </div>    
+                <% }) %>
+            <% } %>
             </div>
           </div>
         </div>
