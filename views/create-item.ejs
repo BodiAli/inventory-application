@@ -57,6 +57,14 @@
                 <span>Item price*:</span>
                 <input type="number" name="itemPrice" required>
               </label>
+              <label>
+                Choose a category
+                <select name="category" >
+                <% categories.forEach(category => { %>
+                  <option value="<%= category.category_id %>"><%= category.category_name %></option>
+                <% }) %>
+                </select>
+              </label>
             </div>
             <button type="submit">Create</button>
           </form>
