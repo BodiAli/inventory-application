@@ -39,7 +39,7 @@ const validateCategory = [
     .custom(async (value) => {
       const [{ count }] = await db.getNumberOfCategoriesByName(value);
       if (Number(count) > 0) {
-        throw new Error("Category already exists please choose a different name.");
+        throw new Error("Category name already exists, please choose a different name.");
       }
     }),
 ];
