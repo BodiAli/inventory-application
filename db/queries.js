@@ -1,19 +1,20 @@
 const pool = require("./pool");
 
+// Add an order by to maintain the same rows sequence even after updating
 async function getAllCategories() {
-  const { rows } = await pool.query("SELECT * FROM categories;");
+  const { rows } = await pool.query("SELECT * FROM categories ORDER BY category_id;");
   return rows;
 }
 
 async function getAllCategoriesLimitFive() {
-  const { rows } = await pool.query("SELECT * FROM categories LIMIT 5;");
+  const { rows } = await pool.query("SELECT * FROM categories ORDER BY category_id LIMIT 5;");
 
   return rows;
 }
 
 async function getCategory(id) {
   const { rows } = await pool.query(
-    "SELECT * FROM categories LEFT JOIN items ON categories.category_id = items.item_category_id WHERE categories.category_id = $1;",
+    "SELECT * FROM categories LEFT JOIN items ON categories.category_id = items.item_category_id WHERE categories.category_id = $1 ORDER BY item_id;",
     [id]
   );
 
@@ -49,7 +50,7 @@ async function getIPhone12() {
 }
 
 async function getAllItems() {
-  const { rows } = await pool.query("SELECT * FROM items;");
+  const { rows } = await pool.query("SELECT * FROM items ORDER BY item_id;");
   return rows;
 }
 
@@ -80,6 +81,13 @@ async function getColorsInItem(id) {
   return rows;
 }
 
+async function updateItem(id, itemName, itemDescription, itemPrice, categoryId) {
+  await pool.query(
+    "UPDATE items SET item_name = $2, item_description = $3, item_price = $4, item_category_id = $5 WHERE item_id = $1",
+    [id, itemName, itemDescription, itemPrice, categoryId]
+  );
+}
+
 async function getAllColors() {
   const { rows } = await pool.query("SELECT * FROM colors;");
   return rows;
@@ -98,6 +106,38 @@ async function createItemColor(colorId, itemId) {
   await pool.query("INSERT INTO colors_items (color_id_fk, item_id_fk) VALUES ($1, $2)", [colorId, itemId]);
 }
 
+async function updateColorsInItems(colors, itemId) {
+  const client = await pool.connect();
+  // Queries are in a transaction because PG documentation says you MUST use the SAME client instance
+  // If I wanted to update colors I would reverse colors with itemId e.g.(items, colorId)
+  try {
+    await client.query("BEGIN");
+
+    await client.query("DELETE FROM colors_items WHERE item_id_fk = $1", [itemId]);
+
+    if (colors && !Array.isArray(colors)) {
+      await client.query("INSERT INTO colors_items (color_id_fk, item_id_fk) VALUES ($1, $2)", [
+        colors,
+        itemId,
+      ]);
+    } else if (colors) {
+      colors.forEach(async (colorId) => {
+        await client.query("INSERT INTO colors_items (color_id_fk, item_id_fk) VALUES ($1, $2)", [
+          colorId,
+          itemId,
+        ]);
+      });
+    }
+
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw new Error(error);
+  } finally {
+    client.release();
+  }
+}
+
 module.exports = {
   getAllCategories,
   getAllCategoriesLimitFive,
@@ -112,8 +152,10 @@ module.exports = {
   createItem,
   getNumberOfItemsByName,
   getColorsInItem,
+  updateItem,
   getAllColors,
   createColor,
   getNumberOfColorsByName,
   createItemColor,
+  updateColorsInItems,
 };
