@@ -4,7 +4,7 @@ main {
 
 .container {
   display: flex;
-  align-items: stretch;
+  align-items: start;
   justify-content: center;
   gap: 100px;
   flex-wrap: wrap;
@@ -15,7 +15,9 @@ main {
   display: flex;
   justify-content: center;
   border: 5px inset gray;
+  border-radius: 5px;
   padding: 1rem;
+  box-shadow: 3px 3px 5px rgb(56, 55, 55);
 }
 
 .colors-container > form {
@@ -32,6 +34,10 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.colors-container > form > label > input {
+  border: 2px solid #000;
+  border-radius: 3px;
 }
 
 .colors-container > form > button {
@@ -55,9 +61,11 @@ main {
   justify-content: center;
   border: 5px groove gray;
   padding: 1rem;
+  box-shadow: 3px 3px 5px rgb(56, 55, 55);
 }
 
 .items-container > form {
+  flex: 0 0 50%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -93,6 +101,11 @@ main {
   gap: 5px;
 }
 
+.form-content > label > input {
+  border: 2px solid #000;
+  border-radius: 3px;
+}
+
 .choose-color-container {
   display: flex;
   flex-direction: column;
@@ -111,7 +124,6 @@ main {
 
 form > ul {
   list-style: initial;
-  list-style-position: inside;
   display: flex;
   flex-direction: column;
   gap: 5px;
