@@ -58,10 +58,10 @@ async function getItem(id) {
   return rows;
 }
 
-async function createItem(itemName, itemDescription, itemPrice) {
+async function createItem(itemName, itemDescription, itemPrice, categoryId) {
   const { rows } = await pool.query(
-    "INSERT INTO items (item_name, item_description, item_price) VALUES ($1, $2, $3) RETURNING item_id",
-    [itemName, itemDescription, itemPrice]
+    "INSERT INTO items (item_name, item_description, item_price, item_category_id) VALUES ($1, $2, $3, $4) RETURNING item_id",
+    [itemName, itemDescription, itemPrice, categoryId]
   );
 
   return rows[0].item_id;
