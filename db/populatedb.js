@@ -16,7 +16,7 @@ const SQL = `
 
   CREATE TABLE IF NOT EXISTS colors (
     color_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    color_name VARCHAR (50) NOT NULL
+    color_name VARCHAR (50) NOT NULL UNIQUE
   );
 
   CREATE TABLE IF NOT EXISTS colors_items (
