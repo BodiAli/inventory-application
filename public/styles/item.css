@@ -165,3 +165,16 @@ form button {
   font-size: 1.2rem;
   width: 100%;
 }
+
+.category {
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #4b4453;
+  align-self: center;
+  transition: filter 200ms ease;
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
