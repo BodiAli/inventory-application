@@ -3,6 +3,7 @@ const express = require("express");
 const indexRouter = require("./routes/indexRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
 const itemsRouter = require("./routes/itemsRouter");
+const colorsRouter = require("./routes/colorsRouter");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.set("view engine", "ejs");
 app.use("/", indexRouter);
 app.use("/categories", passCurrentRouteToTemplate, categoriesRouter);
 app.use("/items", passCurrentRouteToTemplate, itemsRouter);
+app.use("/colors", passCurrentRouteToTemplate, colorsRouter);
 
 const port = process.env.PORT || 3000;
 
