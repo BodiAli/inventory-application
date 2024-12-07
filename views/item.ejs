@@ -51,9 +51,10 @@
                       style="border: 2px solid <%= color.color_name %>;"><%= color.color_name %></p>
                   </div>    
                 <% }) %>
-            <% } %>
-            </div>
+              </div>
+              <% } %>
           </div>
+          <a href="/categories/<%= category.category_id %>" class="category"><%= category.category_name %></a>
         </div>
       </div>
     </main>
