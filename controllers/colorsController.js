@@ -3,6 +3,11 @@ const { body, validationResult } = require("express-validator");
 const { validateHTMLColorName } = require("validate-color");
 const db = require("../db/queries");
 
+exports.getAllColors = asyncHandler(async (req, res) => {
+  const colors = await db.getAllColors();
+  res.render("colors", { title: "All Colors", colors });
+});
+
 const isValidColorNameErr = "must be a valid color name";
 const emptyErr = "can not be empty";
 
