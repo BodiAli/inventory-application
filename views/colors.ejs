@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('partials/global-styles') %>
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/colors.css">
+  <title><%= title %> | TechNova</title>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <% colors.forEach((color) => { %>
+      <form class="<%= color.color_name === 'Black' || color.color_name === 'White' ? 'hidden' : '' %>" popover id="delete-color-<%= color.color_id %>" method="POST" action="/colors/<%= color.color_id %>/delete">
+        <div>
+          <p>Are you sure you want to delete <%= color.color_name %>?</p>
+          <button type="submit">Confirm</button>
+        </div>
+      </form>    
+      <a href="/colors/<%= color.color_id %>">
+        <div class="card">
+          <div class="text">
+            <h3><%= color.color_name %></h3>
+            <div class="dropdown <%= color.color_name === 'Black' || color.color_name === 'White' ? 'hidden' : '' %>">
+              <button class="dropbtn">
+                <img src="/images/dots-vertical.svg" alt="Options" />
+              </button>
+              <div class="dropdown-content">
+                <button data-popover="delete-color-<%= color.color_id %>" popovertarget="delete-color-<%= color.color_id %>" class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </div>
+          <div
+                            <% /* eslint-disable css-propertyvalueexpected */ %>
+          class="color" style="background-color: <%= color.color_name %>;"></div>
+        </div>
+      </a>
+      <% }) %>
+  </main>
+  <script>
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+
+    deleteButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const popoverId = button.getAttribute("data-popover");
+      const popover = document.getElementById(popoverId);
+      if (popover) {
+        popover.showPopover();
+      }
+    });
+  });
+  </script>
+</body>
+</html>
