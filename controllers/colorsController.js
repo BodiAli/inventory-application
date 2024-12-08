@@ -59,3 +59,11 @@ exports.createColor = [
     res.redirect("/items/create");
   }),
 ];
+
+exports.getColor = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const [color] = await db.getColor(id);
+  const items = await db.getItemsInColor(id);
+
+  res.render("color", { title: color.color_name, color, items });
+});
