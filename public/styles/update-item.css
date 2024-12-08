@@ -16,6 +16,7 @@ form {
   gap: 20px;
   border: 5px groove #4b4453;
   border-radius: 5px;
+  box-shadow: 3px 3px 5px black;
 }
 
 form > h2 {
