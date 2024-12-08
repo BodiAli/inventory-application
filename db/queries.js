@@ -73,6 +73,14 @@ async function getNumberOfItemsByName(itemName) {
   return rows;
 }
 
+async function getNumberOfItemsThatIsNotThisId(id, itemName) {
+  const { rows } = await pool.query("SELECT COUNT(*) FROM items WHERE item_name ILIKE $2 AND item_id != $1", [
+    id,
+    itemName,
+  ]);
+  return rows;
+}
+
 async function getColorsInItem(id) {
   const { rows } = await pool.query(
     "SELECT color_name FROM colors JOIN colors_items ON color_id_fk = color_id WHERE item_id_fk = $1;",
@@ -151,6 +159,7 @@ module.exports = {
   getItem,
   createItem,
   getNumberOfItemsByName,
+  getNumberOfItemsThatIsNotThisId,
   getColorsInItem,
   updateItem,
   getAllColors,
