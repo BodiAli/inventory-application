@@ -54,6 +54,11 @@ async function getAllItems() {
   return rows;
 }
 
+async function getAllItemsLimit5() {
+  const { rows } = await pool.query("SELECT * FROM items ORDER BY item_id LIMIT 5;");
+  return rows;
+}
+
 async function getItem(id) {
   const { rows } = await pool.query("SELECT * FROM items WHERE item_id = $1;", [id]);
   return rows;
@@ -89,6 +94,14 @@ async function getColorsInItem(id) {
   return rows;
 }
 
+async function getItemsInColor(id) {
+  const { rows } = await pool.query(
+    "SELECT item_id, item_name, item_description, item_price FROM items JOIN colors_items ON item_id_fk = item_id WHERE color_id_fk = $1;",
+    [id]
+  );
+  return rows;
+}
+
 async function updateItem(id, itemName, itemDescription, itemPrice, categoryId) {
   await pool.query(
     "UPDATE items SET item_name = $2, item_description = $3, item_price = $4, item_category_id = $5 WHERE item_id = $1",
@@ -98,6 +111,12 @@ async function updateItem(id, itemName, itemDescription, itemPrice, categoryId) 
 
 async function getAllColors() {
   const { rows } = await pool.query("SELECT * FROM colors;");
+  return rows;
+}
+
+async function getColor(id) {
+  const { rows } = await pool.query("SELECT * FROM colors WHERE color_id = $1;", [id]);
+
   return rows;
 }
 
@@ -156,13 +175,16 @@ module.exports = {
   updateCategory,
   getIPhone12,
   getAllItems,
+  getAllItemsLimit5,
   getItem,
   createItem,
   getNumberOfItemsByName,
   getNumberOfItemsThatIsNotThisId,
   getColorsInItem,
+  getItemsInColor,
   updateItem,
   getAllColors,
+  getColor,
   createColor,
   getNumberOfColorsByName,
   createItemColor,
