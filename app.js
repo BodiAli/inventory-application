@@ -4,6 +4,7 @@ const indexRouter = require("./routes/indexRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
 const itemsRouter = require("./routes/itemsRouter");
 const colorsRouter = require("./routes/colorsRouter");
+const aboutRouter = require("./routes/aboutRouter");
 
 const app = express();
 
@@ -21,9 +22,14 @@ app.use("/", indexRouter);
 app.use("/categories", passCurrentRouteToTemplate, categoriesRouter);
 app.use("/items", passCurrentRouteToTemplate, itemsRouter);
 app.use("/colors", passCurrentRouteToTemplate, colorsRouter);
+app.use("/about", passCurrentRouteToTemplate, aboutRouter);
 
 const port = process.env.PORT || 3000;
 
 app.listen(3000, () => {
   console.log(`Express app listening on port ${port}`);
 });
+
+// Create items carousel in about page
+// Create delete logic
+// Create error handling
