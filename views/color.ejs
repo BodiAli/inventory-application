@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('partials/global-styles') %>
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/color.css">
+  <title><%= title %> | TechNova</title>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <div class="color-container">
+      <div class="hero">
+        <h2>Below are all items that come with the color:</h2>
+        <p  <% /* eslint-disable css-propertyvalueexpected */ %> 
+          style="background-color: <%= color.color_name %>; color: <%= color.color_name %> ;">
+          <span><%= color.color_name %></span>
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div class="items-container">
+      <% items.forEach((item) => { %>
+        <a href="/items/<%= item.item_id %>">
+          <div class="card">
+            <div class="text">
+              <h3><%= item.item_name %></h3>
+              <img src="/images/right-arrow.svg" alt="right arrow indicating navigating to item when clicked" />
+            </div>
+            <div class="image">
+              <img src="<%= item.item_name === "iPhone 12" ? '/images/iphone12.jpg' : item.item_name ===
+              'MacBook Air (M2)' ? '/images/macbook-air.jpg' : item.item_name === 'Apple Watch Series 8' ?
+              '/images/apple-watch.jpg' : 'https://placehold.co/200x150' %>" alt="<%= item.item_name %>
+              placeholder image" />
+            </div>
+          </div>
+        </a>
+        <% }) %>
+    </div>
+  </main>
+</body>
+</html>
