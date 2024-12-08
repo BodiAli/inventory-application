@@ -101,29 +101,54 @@ exports.getUpdateItemForm = asyncHandler(async (req, res) => {
   });
 });
 
-exports.updateItem = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const errors = validationResult(req);
+const validateItemUpdate = [
+  body("itemName")
+    .trim()
+    .notEmpty()
+    .withMessage(`Item name ${emptyErr}`)
+    .custom(async (value, { req }) => {
+      const [{ count }] = await db.getNumberOfItemsThatIsNotThisId(req.params.id, value);
 
-  if (!errors.isEmpty()) {
-    const [item] = await db.getItem(id);
-    const colorsInItem = await db.getColorsInItem(id);
-    const colors = await db.getAllColors();
-    const categories = await db.getAllCategories();
-    return res.status(400).render("update-category", {
-      title: "Update Item",
-      item,
-      categories,
-      colors,
-      colorsInItem,
-      errors: errors.array(),
-    });
-  }
+      if (Number(count) > 0) {
+        throw new Error("Item name already exists, please choose a different name.");
+      }
+      return true;
+    }),
+  body("itemDescription").trim().notEmpty().withMessage(`Item description ${emptyErr}`),
+  body("itemPrice")
+    .trim()
+    .notEmpty()
+    .withMessage(`Item price ${emptyErr}`)
+    .isNumeric({ no_symbols: true })
+    .withMessage("Item price must be a positive integer"),
+];
 
-  const { itemName, itemDescription, itemPrice, category, colors } = req.body;
+exports.updateItem = [
+  validateItemUpdate,
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const errors = validationResult(req);
 
-  await db.updateItem(id, itemName, itemDescription, itemPrice, category);
-  await db.updateColorsInItems(colors, id);
+    if (!errors.isEmpty()) {
+      const [item] = await db.getItem(id);
+      const colorsInItem = await db.getColorsInItem(id);
+      const colors = await db.getAllColors();
+      const categories = await db.getAllCategories();
+      return res.status(400).render("update-item", {
+        title: "Update Item",
+        item,
+        categories,
+        colors,
+        colorsInItem,
+        errors: errors.array(),
+      });
+    }
 
-  return res.redirect(`/items/${id}`);
-});
+    const { itemName, itemDescription, itemPrice, category, colors } = req.body;
+
+    await db.updateItem(id, itemName, itemDescription, itemPrice, category);
+    await db.updateColorsInItems(colors, id);
+
+    return res.redirect(`/items/${id}`);
+  }),
+];
