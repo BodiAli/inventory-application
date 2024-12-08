@@ -1,0 +1,72 @@
+main {
+  padding: 1rem;
+}
+
+.color-container {
+  padding: 2rem 0;
+}
+
+.color-container > .hero {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero > h2 {
+  font-size: 2rem;
+}
+
+.hero > p {
+  font-size: 1.5rem;
+  padding: 0.6rem;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.hero span {
+  filter: invert(100%);
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.items-container > a {
+  text-decoration: none;
+  border-radius: 5px;
+  transition: transform 200ms ease;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text > h3 {
+  color: black;
+  font-size: 1.5rem;
+}
+
+.text > img {
+  width: 32px;
+}
+
+.image > img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  object-position: 50% 65%;
+  border-radius: 5px;
+}
