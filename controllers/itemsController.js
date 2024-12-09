@@ -87,7 +87,13 @@ exports.createItem = [
 
     const itemId = await db.createItem(itemName, itemDescription, itemPrice, category);
 
-    await db.createItemColor(colors, itemId);
+    if (colors && !Array.isArray(colors)) {
+      await db.createItemColor(colors, itemId);
+    } else if (colors) {
+      colors.forEach(async (colorId) => {
+        await db.createItemColor(colorId, itemId);
+      });
+    }
 
     res.redirect("/items");
   }),
