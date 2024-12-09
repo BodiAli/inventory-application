@@ -2,9 +2,15 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const { validateHTMLColorName } = require("validate-color");
 const db = require("../db/queries");
+const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 exports.getAllColors = asyncHandler(async (req, res) => {
   const colors = await db.getAllColors();
+
+  if (!colors || colors.length === 0) {
+    throw new CustomNotFoundError("No colors found");
+  }
+
   res.render("colors", { title: "All Colors", colors });
 });
 
@@ -61,8 +67,18 @@ exports.createColor = [
 ];
 
 exports.getColor = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
+
+  if (Number.isNaN(id)) {
+    throw new CustomNotFoundError("Color not found");
+  }
+
   const [color] = await db.getColor(id);
+
+  if (!color) {
+    throw new CustomNotFoundError("Color not found");
+  }
+
   const items = await db.getItemsInColor(id);
 
   res.render("color", { title: color.color_name, color, items });
