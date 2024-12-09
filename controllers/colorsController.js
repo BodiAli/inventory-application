@@ -83,3 +83,11 @@ exports.getColor = asyncHandler(async (req, res) => {
 
   res.render("color", { title: color.color_name, color, items });
 });
+
+exports.deleteColor = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  await db.deleteColor(id);
+
+  res.redirect("/colors");
+});
