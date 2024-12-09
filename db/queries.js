@@ -21,6 +21,10 @@ async function getCategory(id) {
   return rows;
 }
 
+async function deleteCategory(id) {
+  await pool.query("DELETE FROM categories WHERE category_id = $1", [id]);
+}
+
 async function getNumberOfCategoriesByName(name) {
   const { rows } = await pool.query("SELECT COUNT(*) FROM categories WHERE category_name ILIKE $1", [name]);
 
@@ -62,6 +66,10 @@ async function getAllItemsLimit5() {
 async function getItem(id) {
   const { rows } = await pool.query("SELECT * FROM items WHERE item_id = $1;", [id]);
   return rows;
+}
+
+async function deleteItem(id) {
+  await pool.query("DELETE FROM items WHERE item_id = $1", [id]);
 }
 
 async function createItem(itemName, itemDescription, itemPrice, categoryId) {
@@ -120,6 +128,10 @@ async function getColor(id) {
   return rows;
 }
 
+async function deleteColor(id) {
+  await pool.query("DELETE FROM colors WHERE color_id = $1", [id]);
+}
+
 async function createColor(colorName) {
   await pool.query("INSERT INTO colors (color_name) VALUES ($1);", [colorName]);
 }
@@ -169,6 +181,7 @@ module.exports = {
   getAllCategories,
   getAllCategoriesLimitFive,
   getCategory,
+  deleteCategory,
   getNumberOfCategoriesByName,
   getNumberOfCategoriesThatIsNotThisId,
   createCategory,
@@ -177,6 +190,7 @@ module.exports = {
   getAllItems,
   getAllItemsLimit5,
   getItem,
+  deleteItem,
   createItem,
   getNumberOfItemsByName,
   getNumberOfItemsThatIsNotThisId,
@@ -185,6 +199,7 @@ module.exports = {
   updateItem,
   getAllColors,
   getColor,
+  deleteColor,
   createColor,
   getNumberOfColorsByName,
   createItemColor,
