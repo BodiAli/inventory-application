@@ -145,3 +145,11 @@ exports.updateCategory = [
     return res.redirect(`/categories/${id}`);
   }),
 ];
+
+exports.deleteCategory = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  await db.deleteCategory(id);
+
+  res.redirect("/categories");
+});
