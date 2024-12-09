@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('partials/global-styles') %>
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/404.css">
+  <title><%= title %> | TechNova</title>
+</head>
+<body>
+  <%- include("partials/header") %>
+  <main>
+    <div class="text">
+      <p>Sorry, we could not find that page.</p>
+      <p>It may have been moved, deleted, or it might have never existed.</p>
+      <a href="/">Home</a>
+    </div>
+  </main>
+</body>
+</html>
