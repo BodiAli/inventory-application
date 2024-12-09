@@ -196,10 +196,15 @@ main > hr {
 
 .item-text > .item-name {
   font-size: 1.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item-text > .item-description {
   color: rgb(54, 53, 53);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 120px;
 }
 
 .item-text > .item-price {
