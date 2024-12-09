@@ -5,9 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%- include('partials/global-styles') %>
   <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/about.css">
   <title><%= title %> | TechNova</title>
 </head>
 <body>
   <%- include('partials/header') %>
+  <main>
+    <div class="container">
+      <div class="text">
+        <p>TechNova makes inventory management simple and organized. Whether you're tracking personal gadgets or managing stock, our app helps you:</p>
+        <ul>
+          <li>Organize by categories: Group items like smartphones, laptops, and more.</li>
+          <li>Add items: Include items like smart phones, smart watches.</li>
+          <li>Track variations: Easily manage colors.</li>
+        </ul>
+        <p>Stay in control of your inventory with ease. Start using TechNova today!</p>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel">
+          <button class="prev">◀</button>
+          <div class="slides">
+            <% items.forEach(item => { %>
+              <a href="/items/<%= item.item_id %>" class="slide">
+                <div class="item-text">
+                  <h2><%= item.item_name %></h2>
+                  <p class="description"><%= item.item_description %></p>
+                  <p class="price"><span>Price:</span> <%= item.item_price%>$</p>      
+                </div>
+                <img src="<%= item.item_name === "iPhone 12" ? '/images/iphone12.jpg' : item.item_name === 'MacBook Air (M2)' ? '/images/macbook-air.jpg' : item.item_name === 'Apple Watch Series 8' ?
+                '/images/apple-watch.jpg' : 'https://placehold.co/200x150' %>" alt="<%= item.item_name %>
+                placeholder image" />
+              </a>
+            <% }) %>
+          </div>
+          <button class="next">▶</button>
+        </div>
+        <div class="dots"></div>
+      </div>
+    </div>
+  </main>
+  <script src="/scripts/about.js"></script>
 </body>
 </html>
