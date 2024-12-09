@@ -27,7 +27,7 @@ main {
   filter: invert(100%);
 }
 
-.items-container {
+.items-container.items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
@@ -69,4 +69,8 @@ main {
   object-fit: cover;
   object-position: 50% 65%;
   border-radius: 5px;
+}
+
+.empty {
+  font-size: 1.4rem;
 }
