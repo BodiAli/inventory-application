@@ -1,17 +1,31 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
+const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 exports.getAllItems = asyncHandler(async (req, res) => {
   const items = await db.getAllItems();
+
+  if (!items || items.length === 0) {
+    throw new CustomNotFoundError("No items found");
+  }
 
   res.render("items", { title: "Items", items });
 });
 
 exports.getItem = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
+  if (Number.isNaN(id)) {
+    throw new CustomNotFoundError("Item not found");
+  }
   const [item] = await db.getItem(id);
+
+  if (!item) {
+    throw new CustomNotFoundError("Item not found");
+  }
+
   const colorsInItem = await db.getColorsInItem(id);
+
   const [category] = await db.getCategory(item.item_category_id);
 
   const isItemFeatured =
@@ -73,21 +87,25 @@ exports.createItem = [
 
     const itemId = await db.createItem(itemName, itemDescription, itemPrice, category);
 
-    if (colors && !Array.isArray(colors)) {
-      await db.createItemColor(colors, itemId);
-    } else if (colors) {
-      colors.forEach(async (colorId) => {
-        await db.createItemColor(colorId, itemId);
-      });
-    }
+    await db.createItemColor(colors, itemId);
 
     res.redirect("/items");
   }),
 ];
 
 exports.getUpdateItemForm = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
+
+  if (Number.isNaN(id)) {
+    throw new CustomNotFoundError("Item not found");
+  }
+
   const [item] = await db.getItem(id);
+
+  if (!item) {
+    throw new CustomNotFoundError("Item not found");
+  }
+
   const colorsInItem = await db.getColorsInItem(id);
   const colors = await db.getAllColors();
   const categories = await db.getAllCategories();
