@@ -115,6 +115,8 @@ body {
   color: #b0a8b9;
   text-decoration: none;
   font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hero {
