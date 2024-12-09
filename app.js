@@ -24,11 +24,11 @@ app.use("/items", passCurrentRouteToTemplate, itemsRouter);
 app.use("/colors", passCurrentRouteToTemplate, colorsRouter);
 app.use("/about", passCurrentRouteToTemplate, aboutRouter);
 
-app.use((req, res) => {
+app.use(passCurrentRouteToTemplate, (req, res) => {
   res.render("404-lost", { title: "404 Not found" });
 });
 
-app.use((err, req, res, _next) => {
+app.use(passCurrentRouteToTemplate, (err, req, res, _next) => {
   console.error(err);
   if (err.statusCode === 404) {
     return res.render("404-input", { title: "404 Not found" });
