@@ -62,10 +62,10 @@ body {
 .nav > ul {
   margin-top: 20px;
   justify-content: center;
-  gap: 200px;
   opacity: 0;
   display: none;
   animation: fade-out 200ms ease-out forwards;
+  gap: 200px;
   &.is-active {
     display: flex;
     animation: fade-in 400ms ease-in-out forwards;
@@ -115,13 +115,13 @@ body {
   color: #b0a8b9;
   text-decoration: none;
   font-size: 0.9rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 .hero {
   height: 100vh;
   background-image: url("/images/background-hero.jpg");
+  background-attachment: fixed;
   background-size: cover;
   display: grid;
   grid-template-areas:
@@ -217,7 +217,6 @@ body {
 .card {
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(20px);
   border-radius: 10px;
   text-decoration: none;
   transition: background-color 200ms ease-out;
@@ -233,8 +232,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.3);
-  filter: blur(20px);
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+  filter: blur(10px);
 }
 
 .hero-cards-container > .featured-item {
@@ -252,7 +251,7 @@ body {
 .featured-item-content > img {
   aspect-ratio: 2 / 1;
   width: 200px;
-  height: 150px;
+  height: 100%;
   object-fit: cover;
   align-self: center;
 }
@@ -308,6 +307,8 @@ body {
   height: 100%;
   border-radius: 0;
   object-fit: contain;
+  isolation: isolate;
+  filter: opacity(0.9);
 }
 
 .hero-locations > p {
@@ -453,4 +454,111 @@ main > h2 {
 
 .hamburger.is-active::after {
   transform: scale(0);
+}
+
+@media (max-width: 1250px) {
+  .nav.is-active {
+    height: 320px;
+  }
+
+  .nav > ul {
+    gap: 50px;
+  }
+
+  .hamburger-container {
+    padding: 1rem 1rem 4rem 1rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @keyframes extend-in {
+    from {
+      width: 30%;
+    }
+    100% {
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 940px) {
+  .nav > ul.is-active {
+    margin-top: 100px;
+  }
+
+  .logo {
+    left: 50%;
+    width: 10%;
+    transform: translateX(-50%);
+  }
+
+  .hero {
+    background-position: center;
+    height: auto;
+    grid-template-areas:
+      "hamburger"
+      "hr"
+      "hero-text"
+      "cards";
+    grid-template-columns: none;
+  }
+
+  .hero-cards-container {
+    margin-top: 50px;
+  }
+
+  .hero-links > a {
+    padding: 1rem;
+    backdrop-filter: none;
+  }
+}
+
+@media (max-width: 770px) {
+  .nav.is-active {
+    height: 630px;
+  }
+  .nav > ul {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .get-started-container > .get-started-card {
+    flex-direction: column;
+    padding: 1rem 1rem 1rem 2rem;
+    gap: 30px;
+  }
+  .get-started-card > .get-started-text {
+    gap: 20px;
+  }
+
+  @keyframes extend-in {
+    from {
+      width: 30%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .button-container {
+    right: 10px;
+  }
+  .hero-text-container {
+    gap: 20px;
+  }
+  .hero-text-container > h1 {
+    font-size: 3rem;
+  }
+  .featured-item .featured-item-content {
+    flex-direction: column;
+  }
+  .featured-item-content > img {
+    width: 100%;
+  }
+  .hero-links > a {
+    padding: 0.8rem 0.4rem;
+  }
 }
