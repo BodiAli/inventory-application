@@ -1,9 +1,14 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
+const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 exports.getAllCategories = asyncHandler(async (req, res) => {
   const categories = await db.getAllCategories();
+
+  if (!categories || categories.length === 0) {
+    throw new CustomNotFoundError("No categories found");
+  }
 
   res.render("categories", { title: "Categories", categories });
 });
@@ -11,7 +16,15 @@ exports.getAllCategories = asyncHandler(async (req, res) => {
 exports.getCategory = asyncHandler(async (req, res) => {
   const id = Number(req.params.id);
 
+  if (Number.isNaN(id)) {
+    throw new CustomNotFoundError("Category not found");
+  }
+
   const rows = await db.getCategory(id);
+
+  if (!rows || rows.length === 0) {
+    throw new CustomNotFoundError("Category not found");
+  }
 
   const [category] = rows;
 
@@ -25,9 +38,9 @@ exports.getCategory = asyncHandler(async (req, res) => {
   res.render("category", { title: category.category_name, category, rows, isCategoryFeatured, hasItems });
 });
 
-exports.getCreateCategoryForm = asyncHandler(async (req, res) => {
+exports.getCreateCategoryForm = (req, res) => {
   res.render("create-category", { title: "Create Category" });
-});
+};
 
 const emptyErr = "can not be empty.";
 
@@ -65,7 +78,16 @@ exports.createCategory = [
 ];
 
 exports.getUpdateCategoryForm = asyncHandler(async (req, res) => {
-  const [category] = await db.getCategory(req.params.id);
+  const id = Number(req.params.id);
+  if (Number.isNaN(id)) {
+    throw new CustomNotFoundError("Category not found");
+  }
+
+  const [category] = await db.getCategory(id);
+
+  if (!category) {
+    throw new CustomNotFoundError("Category not found");
+  }
 
   res.render("update-category", {
     title: "Update Category",
@@ -90,8 +112,22 @@ const validateCategoryUpdate = [
 exports.updateCategory = [
   validateCategoryUpdate,
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const id = Number(req.params.id);
+
+    if (Number.isNaN(id)) {
+      throw new CustomNotFoundError(
+        "Category could have been deleted, moved, or it might have never existed."
+      );
+    }
+
     const [category] = await db.getCategory(id);
+
+    if (!category) {
+      throw new CustomNotFoundError(
+        "Category could have been deleted, moved, or it might have never existed."
+      );
+    }
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
