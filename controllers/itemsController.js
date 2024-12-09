@@ -170,3 +170,11 @@ exports.updateItem = [
     return res.redirect(`/items/${id}`);
   }),
 ];
+
+exports.deleteItem = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  await db.deleteItem(id);
+
+  res.redirect("/items");
+});
