@@ -131,10 +131,12 @@ form button {
 .text-container > h2 {
   font-size: 4rem;
   font-weight: 500;
+  word-break: break-all;
 }
 
 .description {
   font-size: 1.2rem;
+  word-break: break-all;
 }
 
 .price {
@@ -156,6 +158,7 @@ form button {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .color > p {
@@ -174,6 +177,7 @@ form button {
   background-color: #4b4453;
   align-self: center;
   transition: filter 200ms ease;
+  word-break: break-all;
   &:hover {
     filter: brightness(1.2);
   }
