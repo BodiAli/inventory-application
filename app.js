@@ -24,12 +24,20 @@ app.use("/items", passCurrentRouteToTemplate, itemsRouter);
 app.use("/colors", passCurrentRouteToTemplate, colorsRouter);
 app.use("/about", passCurrentRouteToTemplate, aboutRouter);
 
+app.use((req, res) => {
+  res.render("404-lost", { title: "404 Not found" });
+});
+
+app.use((err, req, res, _next) => {
+  console.error(err);
+  if (err.statusCode === 404) {
+    return res.render("404-input", { title: "404 Not found" });
+  }
+  return res.status(500).send(err.message);
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(3000, () => {
   console.log(`Express app listening on port ${port}`);
 });
-
-// Create items carousel in about page
-// Create delete logic
-// Create error handling
