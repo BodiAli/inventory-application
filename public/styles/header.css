@@ -21,6 +21,7 @@ header > a {
 
 .nav {
   display: flex;
+  align-items: center;
   gap: 15px;
 }
 
@@ -42,4 +43,103 @@ header > a {
   border: 1px solid rgb(109, 109, 109);
   position: absolute;
   bottom: -30%;
+}
+
+/* Hamburger button */
+.hamburger {
+  position: relative;
+  width: 40px;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  display: none;
+  z-index: 1;
+}
+
+.hamburger .bar,
+.hamburger::after,
+.hamburger::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  margin: 5px 0px;
+  transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+}
+
+.hamburger.is-active::before {
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.hamburger.is-active::after {
+  transform: rotate(45deg) translate(-5px, -4px);
+}
+
+.hamburger.is-active .bar {
+  opacity: 0;
+}
+
+.mobile-nav {
+  position: absolute;
+  background-color: #4b4453f8;
+  left: 0;
+  top: 0;
+  right: 0;
+  transform: translateY(-100%);
+  display: none;
+  transition: transform 200ms ease;
+  padding: 2rem;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.links-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.links-container > a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  position: relative;
+  transition: color 200ms ease;
+}
+
+.links-container:hover > a:not(:hover) {
+  color: rgb(172, 171, 171);
+}
+
+.links-container > a.currentPage::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border: 1px solid rgb(109, 109, 109);
+  position: absolute;
+  bottom: -30%;
+}
+
+.mobile-nav.is-active {
+  transform: translateY(0px);
+}
+
+@media (max-width: 520px) {
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav > a {
+    display: none;
+  }
 }
