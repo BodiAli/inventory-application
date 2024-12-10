@@ -5,5 +5,16 @@
     <a href="/items" class="<%= currentPath === '/items' ? 'currentPage' : '' %>">All items</a>
     <a href="/colors" class="<%= currentPath === '/colors' ? 'currentPage' : '' %>">All colors</a>
     <a href="/about" class="<%= currentPath === '/about' ? 'currentPage' : '' %>">About</a>
+    <button class="hamburger">
+      <div class="bar"></div>
+    </button>
   </nav>
+  <div class="mobile-nav">
+    <div class="links-container">
+      <a href="/categories" class="<%= currentPath === '/categories' ? 'currentPage' : '' %>">Categories</a>
+      <a href="/items" class="<%= currentPath === '/items' ? 'currentPage' : '' %>">All items</a>
+      <a href="/colors" class="<%= currentPath === '/colors' ? 'currentPage' : '' %>">All colors</a>
+      <a href="/about" class="<%= currentPath === '/about' ? 'currentPage' : '' %>">About</a>
+    </div>
+  </div>
 </header>
