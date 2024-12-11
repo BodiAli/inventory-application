@@ -2,6 +2,7 @@ main {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+  padding: 1rem;
 }
 
 form {
@@ -17,12 +18,14 @@ form {
 form h2 {
   font-size: 3rem;
   margin-bottom: auto;
+  word-break: break-all;
 }
 
 form > div {
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-wrap: wrap;
 }
 
 form > div > label {
@@ -54,4 +57,13 @@ form button {
 form ul {
   list-style: initial;
   align-self: center;
+}
+
+@media (max-width: 700px) {
+  form h2 {
+    font-size: 2rem;
+  }
+  form > div > label {
+    font-size: 1.5rem;
+  }
 }
