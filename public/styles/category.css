@@ -149,7 +149,7 @@ main > hr {
 
 .items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
 
@@ -220,4 +220,24 @@ main > hr {
   object-fit: cover;
   border-radius: 5px;
   aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 700px) {
+  .category {
+    gap: 20px;
+  }
+
+  .category > h2 {
+    font-size: 3rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .category > img {
+    width: 100%;
+  }
+
+  .category {
+    flex-direction: column;
+  }
 }
