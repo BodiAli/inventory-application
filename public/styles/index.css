@@ -48,9 +48,9 @@ body {
 
 .logo {
   position: absolute;
-  width: 5%;
+  width: 65px;
   border-radius: 20%;
-  left: 5%;
+  left: 3%;
   opacity: 0;
   transition: opacity 200ms ease-in-out;
 }
@@ -490,7 +490,7 @@ main > h2 {
 
   .logo {
     left: 50%;
-    width: 10%;
+    width: 80px;
     transform: translateX(-50%);
   }
 
