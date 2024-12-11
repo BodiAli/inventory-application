@@ -116,7 +116,6 @@ main > hr {
 .category {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
 
 .category > h2 {
@@ -126,6 +125,7 @@ main > hr {
   color: #fff;
   text-shadow: 0 0 10px black;
   word-break: break-all;
+  text-align: center;
 }
 
 .category > img {
@@ -230,7 +230,6 @@ main > hr {
   .category > h2 {
     font-size: 3rem;
     width: 100%;
-    text-align: center;
   }
 
   .category > img {
