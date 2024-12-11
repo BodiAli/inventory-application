@@ -1,4 +1,7 @@
+// eslint-disable-next-line import/extensions
+require("./instrument.js");
 require("dotenv").config();
+const Sentry = require("@sentry/node");
 const express = require("express");
 const indexRouter = require("./routes/indexRouter");
 const categoriesRouter = require("./routes/categoriesRouter");
@@ -27,6 +30,8 @@ app.use("/about", passCurrentRouteToTemplate, aboutRouter);
 app.use(passCurrentRouteToTemplate, (req, res) => {
   res.render("404-lost", { title: "404 Not found" });
 });
+
+Sentry.setupExpressErrorHandler(app);
 
 app.use(passCurrentRouteToTemplate, (err, req, res, _next) => {
   console.error(err);
