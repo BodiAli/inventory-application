@@ -2,6 +2,7 @@ const slides = document.querySelector(".slides");
 const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
 const dotsContainer = document.querySelector(".dots");
+const carouselWidth = document.querySelector(".carousel").clientWidth;
 
 let currentIndex = 0;
 
@@ -17,7 +18,7 @@ function updateDots() {
 }
 
 function updateCarousel() {
-  const offset = -currentIndex * 500;
+  const offset = -currentIndex * carouselWidth;
 
   slides.style.transform = `translateX(${offset}px)`;
   updateDots();
