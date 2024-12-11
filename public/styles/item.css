@@ -19,6 +19,7 @@ form > div {
 
 form > div > p {
   font-size: 1.4rem;
+  word-break: break-all;
 }
 
 form button {
@@ -111,7 +112,7 @@ form button {
 }
 
 .image-container {
-  flex: 1 0 0%;
+  flex: 1 0;
 }
 
 .image-container > img {
@@ -124,7 +125,7 @@ form button {
 .text-container {
   display: flex;
   flex-direction: column;
-  flex: 1 1 0%;
+  flex: 1;
   gap: 20px;
 }
 
@@ -180,5 +181,12 @@ form button {
   word-break: break-all;
   &:hover {
     filter: brightness(1.2);
+  }
+}
+
+@media (max-width: 700px) {
+  .item-container {
+    flex-direction: column;
+    gap: 20px;
   }
 }
