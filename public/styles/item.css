@@ -35,6 +35,14 @@ form button {
   }
 }
 
+form .close-popover {
+  align-self: end;
+  background-color: rgb(140, 0, 0);
+  &:hover {
+    background-color: crimson;
+  }
+}
+
 :popover-open {
   inset: unset;
   top: 1rem;
@@ -188,5 +196,9 @@ form button {
   .item-container {
     flex-direction: column;
     gap: 20px;
+  }
+
+  :popover-open {
+    width: 90%;
   }
 }
