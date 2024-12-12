@@ -49,6 +49,14 @@ form button {
   }
 }
 
+form .close-popover {
+  align-self: end;
+  background-color: rgb(140, 0, 0);
+  &:hover {
+    background-color: crimson;
+  }
+}
+
 :popover-open {
   inset: unset;
   top: 1rem;
@@ -141,4 +149,10 @@ form button {
   padding: 6rem;
   border-radius: 5px;
   box-shadow: 2px 2px 6px black;
+}
+
+@media (max-width: 700px) {
+  :popover-open {
+    width: 90%;
+  }
 }
