@@ -34,6 +34,14 @@ form button {
   }
 }
 
+form .close-popover {
+  align-self: end;
+  background-color: rgb(140, 0, 0);
+  &:hover {
+    background-color: crimson;
+  }
+}
+
 :popover-open {
   inset: unset;
   top: 1rem;
@@ -51,6 +59,7 @@ main {
   gap: 50px;
   margin-top: 1rem;
   padding: 1rem;
+  min-height: 100vh;
 }
 
 .dropdown {
@@ -238,5 +247,9 @@ main > hr {
 
   .category {
     flex-direction: column;
+  }
+
+  :popover-open {
+    width: 90%;
   }
 }
