@@ -12,6 +12,7 @@
     <%- include('partials/header') %>
     <form popover id="delete-item" method="post" action="/items/<%= item.item_id %>/delete">
       <div>
+        <button class="close-popover" type="button" popovertargetaction="hide" popovertarget="delete-item">X</button>
         <p>Are you sure you want to delete <%= item.item_name %>?</p>
         <button type="submit">Confirm</button>
       </div>

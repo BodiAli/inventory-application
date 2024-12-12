@@ -14,6 +14,7 @@
     <% colors.forEach((color) => { %>
       <form class="<%= color.color_name === 'Black' || color.color_name === 'White' ? 'hidden' : '' %>" popover id="delete-color-<%= color.color_id %>" method="POST" action="/colors/<%= color.color_id %>/delete">
         <div>
+          <button class="close-popover" type="button" popovertargetaction="hide" popovertarget="delete-color-<%= color.color_id %>">X</button>
           <p>Are you sure you want to delete <%= color.color_name %>?</p>
           <button type="submit">Confirm</button>
         </div>
