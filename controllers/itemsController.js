@@ -1,7 +1,12 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const multer = require("multer");
+const fs = require("node:fs/promises");
 const db = require("../db/queries");
+const cloudinary = require("../config/cloudinaryConfig");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
+
+const upload = multer({ dest: "uploads/" });
 
 exports.getAllItems = asyncHandler(async (req, res) => {
   const items = await db.getAllItems();
@@ -63,9 +68,20 @@ const validateItem = [
     .withMessage(`Item price ${emptyErr}`)
     .isNumeric({ no_symbols: true })
     .withMessage("Item price must be a positive integer"),
+  body("itemImage").custom(async (value, { req }) => {
+    if (req.file.size > 2097152) {
+      await fs.rm(req.file.path);
+      throw new Error("File cannot be larger than 2MB");
+    } else if (!req.file.mimetype.startsWith("image/")) {
+      await fs.rm(req.file.path);
+      throw new Error("File uploaded is not of type image");
+    }
+    return true;
+  }),
 ];
 
 exports.createItem = [
+  upload.single("itemImage"),
   validateItem,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
@@ -85,7 +101,11 @@ exports.createItem = [
 
     const { itemName, itemDescription, itemPrice, category, colors } = req.body;
 
-    const itemId = await db.createItem(itemName, itemDescription, itemPrice, category);
+    const { secure_url: url } = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" });
+
+    const itemId = await db.createItem(itemName, itemDescription, itemPrice, category, url);
+
+    await fs.rm(req.file.path);
 
     if (colors && !Array.isArray(colors)) {
       await db.createItemColor(colors, itemId);
