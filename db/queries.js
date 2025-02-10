@@ -40,8 +40,11 @@ async function getNumberOfCategoriesThatIsNotThisId(id, name) {
   return rows;
 }
 
-async function createCategory(categoryName) {
-  await pool.query("INSERT INTO categories (category_name) VALUES ($1);", [categoryName]);
+async function createCategory(categoryName, url) {
+  await pool.query("INSERT INTO categories (category_name, category_image_url) VALUES ($1, $2);", [
+    categoryName,
+    url,
+  ]);
 }
 
 async function updateCategory(id, categoryName) {
@@ -72,10 +75,10 @@ async function deleteItem(id) {
   await pool.query("DELETE FROM items WHERE item_id = $1", [id]);
 }
 
-async function createItem(itemName, itemDescription, itemPrice, categoryId) {
+async function createItem(itemName, itemDescription, itemPrice, categoryId, url) {
   const { rows } = await pool.query(
-    "INSERT INTO items (item_name, item_description, item_price, item_category_id) VALUES ($1, $2, $3, $4) RETURNING item_id",
-    [itemName, itemDescription, itemPrice, categoryId]
+    "INSERT INTO items (item_name, item_description, item_price, item_category_id, item_image_url) VALUES ($1, $2, $3, $4, $5) RETURNING item_id",
+    [itemName, itemDescription, itemPrice, categoryId, url]
   );
 
   return rows[0].item_id;
