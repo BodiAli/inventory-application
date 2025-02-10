@@ -1,7 +1,12 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const multer = require("multer");
+const fs = require("node:fs/promises");
 const db = require("../db/queries");
+const cloudinary = require("../config/cloudinaryConfig");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
+
+const upload = multer({ dest: "uploads/" });
 
 exports.getAllCategories = asyncHandler(async (req, res) => {
   const categories = await db.getAllCategories();
@@ -56,9 +61,20 @@ const validateCategory = [
       }
       return true;
     }),
+  body("categoryImage").custom(async (value, { req }) => {
+    if (req.file.size > 2097152) {
+      await fs.rm(req.file.path);
+      throw new Error("File cannot be larger than 2MB");
+    } else if (!req.file.mimetype.startsWith("image/")) {
+      await fs.rm(req.file.path);
+      throw new Error("File uploaded is not of type image");
+    }
+    return true;
+  }),
 ];
 
 exports.createCategory = [
+  upload.single("categoryImage"),
   validateCategory,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
@@ -71,7 +87,11 @@ exports.createCategory = [
     }
 
     const { categoryName } = req.body;
-    await db.createCategory(categoryName);
+    const { secure_url: url } = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" });
+
+    await db.createCategory(categoryName, url);
+
+    await fs.rm(req.file.path);
 
     return res.redirect("/categories");
   }),
