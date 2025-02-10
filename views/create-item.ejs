@@ -30,7 +30,7 @@
           </form>
         </div>
         <div class="items-container">
-          <form method="post">
+          <form method="post" enctype="multipart/form-data">
             <%- include('partials/errors') %>
             <h2>Create a new item</h2>
             <div class="form-content">
@@ -58,12 +58,16 @@
                 <input type="number" name="itemPrice" required>
               </label>
               <label>
-                Choose a category
+                Choose a category*:
                 <select name="category" >
                 <% categories.forEach(category => { %>
                   <option value="<%= category.category_id %>"><%= category.category_name %></option>
                 <% }) %>
                 </select>
+              </label>
+              <label>
+                Item image*:
+                <input type="file" name="itemImage" />  
               </label>
             </div>
             <button type="submit">Create</button>

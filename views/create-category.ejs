@@ -13,12 +13,18 @@
     <%- include('partials/header') %>
     <main>
       <!-- Action is to the current route because it's omitted -->
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         <%- include('partials/errors') %>
         <h2>Create a new category</h2>
         <div>
-          <label for="category-name">Category Name*:</label>
-          <input required maxlength="100" type="text" name="categoryName" id="category-name" />
+          <label>
+            Category Name*:
+            <input required maxlength="100" type="text" name="categoryName" />
+          </label>
+          <label>
+            Category Image*:
+            <input required type="file" name="categoryImage" />
+          </label>
         </div>
         <button type="submit">Create</button>
       </form>
