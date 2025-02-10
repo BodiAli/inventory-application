@@ -32,8 +32,8 @@
         <h2><%= category.category_name%></h2>
         <img src="<%= category.category_name === "Smart Phones" ? '/images/smart-phones-category.jpg' :
         category.category_name === 'Laptops' ? '/images/laptops-category.jpg' : category.category_name ===
-        'Smart Watches' ? '/images/smart-watches-category.jpg' : 'https://placehold.co/200x150' %>" alt="<%=
-        category.category_name %> placeholder image" />
+        'Smart Watches' ? '/images/smart-watches-category.jpg' : category.category_image_url %>" alt="<%=
+        category.category_name %> image" />
       </section>
       <hr />
       <section class="<%= hasItems ? 'items' : '' %>">
@@ -46,8 +46,8 @@
           </div>
           <div class="image">
             <img
-              src="<%= row.item_name === 'iPhone 12' ? '/images/iphone12.jpg' : row.item_name === 'MacBook Air (M2)' ? '/images/macbook-air.jpg' : row.item_name === 'Apple Watch Series 8' ? '/images/apple-watch.jpg' : 'https://placehold.co/200x150' %>"
-              alt="<%= row.item_name %> placeholder image"
+              src="<%= row.item_name === 'iPhone 12' ? '/images/iphone12.jpg' : row.item_name === 'MacBook Air (M2)' ? '/images/macbook-air.jpg' : row.item_name === 'Apple Watch Series 8' ? '/images/apple-watch.jpg' : row.item_image_url %>"
+              alt="<%= row.item_name %> image"
             />
           </div>
         </a>
