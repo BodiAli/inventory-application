@@ -24,8 +24,8 @@
           <div class="image">
             <img src="<%= category.category_name === "Smart Phones" ? '/images/smart-phones-category.jpg' :
             category.category_name === 'Laptops' ? '/images/laptops-category.jpg' : category.category_name ===
-            'Smart Watches' ? '/images/smart-watches-category.jpg' : 'https://placehold.co/200x150' %>"
-            alt="<%= category.category_name %> placeholder image" />
+            'Smart Watches' ? '/images/smart-watches-category.jpg' : category.category_image_url %>"
+            alt="<%= category.category_name %> image" />
           </div>
         </div>
       </a>
