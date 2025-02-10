@@ -3,7 +3,8 @@ const { Client } = require("pg");
 const SQL = `
   CREATE TABLE IF NOT EXISTS categories (
     category_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    category_name VARCHAR (100) NOT NULL UNIQUE
+    category_name VARCHAR (100) NOT NULL UNIQUE,
+    category_image_url VARCHAR (255)
   );
 
   CREATE TABLE IF NOT EXISTS items (
@@ -11,6 +12,7 @@ const SQL = `
     item_name VARCHAR (100) NOT NULL UNIQUE,
     item_description TEXT NOT NULL,
     item_price INTEGER NOT NULL,
+    item_image_url VARCHAR (255),
     item_category_id INTEGER REFERENCES categories ON DELETE CASCADE
   );
 
